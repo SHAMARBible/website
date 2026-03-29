@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronRight, ChevronLeft, Home, Maximize, Minimize, Eye, EyeOff } from 'lucide-react';
 import { GeometricBackground } from './components/shared/GeometricBackground';
 import { shamarData } from './data/shamarData';
@@ -17,6 +17,24 @@ export default function App() {
 
   // Global tracking for hierarchical breadcrumb hovers
   const [hoveredLevel, setHoveredLevel] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setPresentationMode(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => console.error(err));
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  };
 
   const steps = [
     { id: 'intro', title: 'Introduction' },
@@ -105,7 +123,7 @@ export default function App() {
 
         {/* Floating Presentation Controls */}
         <div
-          className={`fixed bottom-4 right-4 md:bottom-6 md:right-6 transition-all duration-300 ${presentationMode ? 'opacity-0 pointer-events-none' : 'opacity-30 hover:opacity-100'} bg-white/70 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-slate-200/50 flex items-center space-x-3 z-50 group hover:scale-105`}
+          className="fixed bottom-4 right-4 md:bottom-6 md:right-6 transition-all duration-300 opacity-30 hover:opacity-100 bg-white/70 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-slate-200/50 flex items-center space-x-3 z-50 group hover:scale-105"
         >
           <button
             onClick={handlePrev}
@@ -137,9 +155,9 @@ export default function App() {
           <div className="w-px h-5 bg-slate-300/80 mx-1"></div>
 
           <button
-            onClick={() => setPresentationMode(!presentationMode)}
+            onClick={toggleFullScreen}
             className="p-1.5 text-slate-500 hover:text-orange-600 transition-colors"
-            title="Toggle Presentation Mode (hides controls)"
+            title="Toggle Full Screen"
           >
             {presentationMode ? <Minimize size={16} /> : <Maximize size={16} />}
           </button>
