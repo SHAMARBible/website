@@ -35,7 +35,7 @@ export const IntroView: React.FC<IntroViewProps> = ({ isActive }) => {
           </div>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center mb-4 sm:mb-5 md:mb-6 opacity-0 animate-fade-in-up delay-[1400ms]">
+        <div className="relative flex flex-col items-center justify-center mb-4 sm:mb-5 md:mb-16 opacity-0 animate-fade-in-up delay-[1400ms]">
           <div className="px-2 py-0.5 md:px-5 md:py-1.5 bg-white/40 backdrop-blur-sm border border-slate-200/50 rounded-full text-[7px] md:text-[10px] font-bold text-slate-500 uppercase tracking-widest shadow-sm z-10">The Bible</div>
           <div className="w-px h-3 sm:h-4 md:h-6 bg-slate-300"></div>
 
