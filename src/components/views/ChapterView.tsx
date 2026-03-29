@@ -44,7 +44,9 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
             hoverType="chapter"
             originHighlight={{ isActive: hoveredLevel === 'book', tooltip: 'E ⟵ Chapter 2' }}
           />
-          <p className="mt-4 md:mt-8 mx-auto max-w-xl text-[9px] sm:text-[10px] md:text-sm text-slate-600 text-center font-light bg-white/40 px-3 py-1.5 md:px-5 md:py-2 rounded-full border border-white/50">{shamarData.chapter.description}</p>
+          <p className="mt-4 sm:mt-6 md:mt-8 text-[8px] sm:text-[10px] md:text-xs text-slate-500 max-w-2xl mx-auto text-center font-light uppercase tracking-widest px-4">
+            {shamarData.chapter.description}
+          </p>
         </div>
       </div>
     </div>

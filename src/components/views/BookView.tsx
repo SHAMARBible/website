@@ -36,6 +36,9 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
             hoverType="book"
             originHighlight={{ isActive: hoveredLevel === 'testament', tooltip: 'Y ⟵ 27th Book' }}
           />
+          <p className="mt-4 sm:mt-6 md:mt-8 text-[8px] sm:text-[10px] md:text-xs text-slate-500 max-w-2xl mx-auto text-center font-light uppercase tracking-widest px-4">
+            {shamarData.book.description}
+          </p>
         </div>
       </div>
     </div>

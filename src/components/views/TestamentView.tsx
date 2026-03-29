@@ -46,7 +46,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive }) => {
                 onMouseLeave={() => setHoveredGroupIndex(null)}
               >
                 <div className="flex flex-col md:flex-row items-center justify-between w-full">
-                  <div className="flex-1 text-center md:text-left mb-2 md:mb-0 w-full max-w-full overflow-hidden">
+                  <div className="flex-1 text-center md:text-left mb-2 md:mb-0 w-full max-w-full pl-1 sm:pl-2 md:pl-3">
                     <InteractiveAcrostic
                       text={group.words}
                       hoverType="testament-card"
@@ -75,7 +75,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive }) => {
                 </div>
 
                 <div className={`w-full overflow-hidden transition-all duration-500 ease-in-out flex justify-center md:justify-start ${isGroupHovered || activeBookName ? 'max-h-24 opacity-100 mt-2 sm:mt-3 md:mt-4' : 'max-h-0 opacity-0 mt-0'}`}>
-                  <div className="text-[8px] sm:text-[9px] md:text-xs text-slate-500 font-medium tracking-wide flex flex-wrap justify-center md:justify-start gap-x-1 sm:gap-x-1.5 gap-y-0.5 sm:gap-y-1 text-center md:text-left">
+                  <div className="text-[8px] sm:text-[9px] md:text-xs text-slate-500 font-medium tracking-wide flex flex-wrap justify-center md:justify-start gap-x-1 sm:gap-x-1.5 gap-y-0.5 sm:gap-y-1 text-center md:text-left px-2 sm:px-3 py-1.5">
                     {group.books.map((bookName, bIdx) => {
                       const localGlobalIdx = runningOffset + bIdx + 1;
                       const isThisBookHovered = hoveredBookIdx === localGlobalIdx;
@@ -83,7 +83,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive }) => {
                         <React.Fragment key={bIdx}>
                           {bIdx > 0 && <span className="text-slate-300 pointer-events-none">•</span>}
                           <span
-                            className={`cursor-pointer transition-all duration-300 uppercase ${isThisBookHovered ? 'text-orange-600 font-bold drop-shadow-sm scale-105' : 'hover:text-orange-400'}`}
+                            className={`cursor-pointer inline-block transition-all duration-300 uppercase ${isThisBookHovered ? 'text-orange-600 font-bold drop-shadow-sm scale-105' : 'hover:text-orange-400'}`}
                             onMouseEnter={() => setHoveredBookIdx(localGlobalIdx)}
                             onMouseLeave={() => setHoveredBookIdx(null)}
                           >
