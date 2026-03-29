@@ -8,12 +8,12 @@ interface AcronymLetterProps {
 
 export const AcronymLetter: React.FC<AcronymLetterProps> = ({ letter, fullWord, delayClass }) => (
   <div className={`flex flex-col items-center opacity-0 animate-fade-in-up ${delayClass}`}>
-    <span className="text-5xl md:text-7xl font-serif font-bold text-orange-600 drop-shadow-sm mb-2 md:mb-3 leading-none">
+    <span className="text-[2.5rem] leading-[1] sm:text-6xl md:text-7xl font-serif font-bold text-orange-600 drop-shadow-sm mb-0 sm:mb-2 md:mb-3">
       {letter}
     </span>
     {/* Full word with first letter bolded & orange to emphasize the connection */}
-    <span className="text-xs md:text-sm font-medium tracking-widest text-slate-500 uppercase flex items-baseline">
-      <strong className="text-orange-600 text-sm md:text-base mr-[1px] font-bold">{fullWord.charAt(0)}</strong>
+    <span className="text-[9px] sm:text-xs md:text-sm font-medium tracking-widest text-slate-500 uppercase flex items-baseline mt-1 sm:mt-0">
+      <strong className="text-orange-600 text-[11px] sm:text-sm md:text-base mr-[1px] font-bold">{fullWord.charAt(0)}</strong>
       {fullWord.slice(1)}
     </span>
   </div>

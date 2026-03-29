@@ -24,7 +24,7 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
   startIdxOffset = 0,
   originHighlight = null,
   naked = false,
-  textClass = "text-2xl md:text-3xl lg:text-4xl font-serif text-slate-800 tracking-wide font-medium",
+  textClass = "text-[1.1rem] leading-none sm:text-xl md:text-3xl lg:text-4xl font-serif text-slate-800 tracking-wide font-medium",
   justifyClass = "justify-center",
   onHoverChange,
   externalHoverIdx = null
@@ -38,8 +38,8 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
     <>
       {sections.map((section, sIdx) => (
         <React.Fragment key={sIdx}>
-          {sIdx > 0 && <span className="text-orange-300/60 font-light text-2xl md:text-4xl mx-1 md:mx-3 select-none">|</span>}
-          <div className="flex flex-wrap justify-center gap-x-2 md:gap-x-3 gap-y-6">
+          {sIdx > 0 && <span className="text-orange-300/60 font-light text-xl sm:text-2xl md:text-4xl mx-0.5 sm:mx-1 md:mx-3 select-none">|</span>}
+          <div className="flex flex-wrap justify-center gap-x-0.5 sm:gap-x-1 md:gap-x-3 gap-y-3 sm:gap-y-4 md:gap-y-6">
             {section.trim().split(' ').map((word, wIdx) => (
               <span key={wIdx} className={`flex ${textClass}`}>
                 {word.split('').map((char, cIdx) => {
@@ -51,7 +51,6 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                   const showOrigin = isFirstLetter && originHighlight?.isActive;
                   const isHovered = hoveredIdx === currentGlobalIdx || externalHoverIdx === currentGlobalIdx;
 
-                  // Determine what text to show below the letter when hovered
                   let subText = "";
                   if (hoverType === 'testament') subText = ntBooksArray[currentGlobalIdx - 1];
                   else if (hoverType === 'book') subText = `Ch ${currentGlobalIdx}`;
@@ -74,25 +73,23 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                         }
                       }}
                     >
-                      <span className={`relative transition-all duration-300 ${showOrigin ? 'text-orange-600 scale-125 drop-shadow-md bg-orange-200 text-orange-900 px-1.5 rounded -translate-y-1 z-30 font-bold'
+                      <span className={`relative transition-all duration-300 ${showOrigin ? 'text-orange-600 scale-125 drop-shadow-md bg-orange-200 text-orange-900 px-[1px] md:px-1.5 rounded -translate-y-1 z-30 font-bold'
                           : isHovered ? 'text-orange-600 scale-125 -translate-y-1 drop-shadow-md z-20 font-bold'
                             : 'hover:text-orange-600'
                         }`}>
                         {char}
 
-                        {/* Origin Upward Tooltip */}
                         {showOrigin && originHighlight?.tooltip && !isHovered && (
                           <span className="absolute bottom-full left-1/2 w-0 flex justify-center z-50">
-                            <span className="mb-3 whitespace-nowrap text-[9px] md:text-[10px] font-sans font-bold text-white bg-slate-700 px-2.5 py-1 rounded shadow-md pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-slate-700 animate-fade-in-up tracking-wider">
+                            <span className="mb-2 md:mb-3 whitespace-nowrap text-[8px] md:text-[10px] font-sans font-bold text-white bg-slate-700 px-1.5 md:px-2.5 py-0.5 md:py-1 rounded shadow-md pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-slate-700 animate-fade-in-up tracking-wider">
                               {originHighlight.tooltip}
                             </span>
                           </span>
                         )}
                       </span>
 
-                      {/* Interactive Subword Tooltip */}
                       {isLetter && subText && (
-                        <span className={`absolute top-full mt-1 md:mt-2 text-[8px] md:text-[9px] font-sans font-bold uppercase tracking-widest whitespace-nowrap transition-all duration-300 pointer-events-none ${isHovered ? 'opacity-100 text-orange-600 translate-y-0' : 'opacity-0 text-slate-400 -translate-y-1'
+                        <span className={`absolute top-full mt-0.5 sm:mt-1 md:mt-2 text-[6px] sm:text-[7px] md:text-[9px] font-sans font-bold uppercase tracking-widest whitespace-nowrap transition-all duration-300 pointer-events-none ${isHovered ? 'opacity-100 text-orange-600 translate-y-0' : 'opacity-0 text-slate-400 -translate-y-1'
                           }`}>
                           {subText}
                         </span>
@@ -109,15 +106,15 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
   );
 
   if (naked) {
-    return <div className={`flex flex-wrap items-center gap-y-6 ${justifyClass}`}>{content}</div>;
+    return <div className={`flex flex-wrap items-center gap-y-2 sm:gap-y-4 md:gap-y-6 ${justifyClass}`}>{content}</div>;
   }
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-6 w-full">
-      <div className="flex flex-wrap justify-center items-center gap-x-3 gap-y-3 bg-white/40 px-6 pt-5 pb-8 md:px-10 md:pt-6 md:pb-10 rounded-3xl border border-white/60 shadow-sm backdrop-blur-md max-w-5xl">
+    <div className="flex flex-col items-center justify-center space-y-3 md:space-y-6 w-full">
+      <div className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-3 gap-y-2 sm:gap-y-3 bg-white/40 px-3 pt-3 pb-5 sm:px-6 sm:pt-5 sm:pb-8 md:px-10 md:pt-6 md:pb-10 rounded-xl sm:rounded-3xl border border-white/60 shadow-sm backdrop-blur-md max-w-5xl">
         {content}
       </div>
-      <div className="px-4 py-1.5 rounded-full border border-orange-200 bg-orange-50/70 text-orange-800 text-xs tracking-widest font-semibold uppercase shadow-sm">
+      <div className="px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-orange-200 bg-orange-50/70 text-orange-800 text-[10px] md:text-xs tracking-widest font-semibold uppercase shadow-sm">
         {totalLetters} Letters
       </div>
     </div>
