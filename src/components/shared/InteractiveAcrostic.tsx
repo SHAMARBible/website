@@ -110,12 +110,14 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-3 md:space-y-6 w-full">
-      <div className="flex flex-wrap justify-center items-center gap-x-1 sm:gap-x-3 gap-y-2 sm:gap-y-3 bg-white/40 px-3 pt-3 pb-5 sm:px-6 sm:pt-5 sm:pb-8 md:px-10 md:pt-6 md:pb-10 rounded-xl sm:rounded-3xl border border-white/60 shadow-sm backdrop-blur-md max-w-5xl">
+    <div className="flex justify-center w-full">
+      <div className="relative flex flex-wrap justify-center items-center w-full gap-x-1 sm:gap-x-3 gap-y-2 sm:gap-y-3 bg-white/40 px-3 pt-3 pb-6 sm:px-6 sm:pt-5 sm:pb-8 md:px-10 md:pt-6 md:pb-10 rounded-xl sm:rounded-3xl border border-white/60 shadow-sm backdrop-blur-md max-w-5xl">
         {content}
-      </div>
-      <div className="px-3 py-1 md:px-4 md:py-1.5 rounded-full border border-orange-200 bg-orange-50/70 text-orange-800 text-[10px] md:text-xs tracking-widest font-semibold uppercase shadow-sm">
-        {totalLetters} Letters
+        <div className="absolute -bottom-2 sm:-bottom-2.5 md:-bottom-3 left-1/2 -translate-x-1/2 pointer-events-none">
+          <span className="flex items-center px-2 py-0.5 sm:px-3 sm:py-1 shadow-md rounded-full border border-orange-200 bg-orange-100 text-orange-800 text-[7px] sm:text-[9px] md:text-[11px] tracking-widest font-bold uppercase whitespace-nowrap">
+            {totalLetters} Letters
+          </span>
+        </div>
       </div>
     </div>
   );
