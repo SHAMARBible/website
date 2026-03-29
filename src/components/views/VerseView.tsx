@@ -15,9 +15,9 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
 
   return (
     <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-      <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4 max-w-6xl mx-auto px-2 sm:px-4">
+      <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4 max-w-[1400px] mx-auto px-2 sm:px-4">
         {showAcrosticBreadcrumbs && (
-          <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full max-w-6xl">
+          <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full max-w-[1400px]">
             <HighlightedAcrostic
               text={fullTestamentAcrostic}
               pointerIndex={27} pointerTooltip="Y ➔ Revelation" isPointerActive={hoveredLevel === 'testament'}
@@ -44,11 +44,11 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
             />
           </div>
         )}
-        <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 sm:mb-1 font-semibold text-[10px] md:text-xs">Verse Level</h3>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-2 sm:mb-4 md:mb-6 text-slate-800 text-center">{shamarData.target}</h2>
+        <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 font-semibold text-[10px] md:text-[11px]">Verse Level</h3>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-2 md:mb-4 text-slate-800 text-center">{shamarData.target}</h2>
 
         {/* Subtle Acrostic Word Display */}
-        <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-4 mb-3 sm:mb-5 md:mb-8">
+        <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 mb-2 md:mb-4 lg:mb-6">
           {shamarData.verse.subwords.map((item, idx) => {
             const isVerseOriginActive = hoveredLevel === 'chapter' && idx === 0;
             const isHovered = hoveredVerseIndex === idx;
@@ -61,8 +61,8 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                 onMouseEnter={() => setHoveredVerseIndex(idx)}
                 onMouseLeave={() => setHoveredVerseIndex(null)}
               >
-                <span className={`relative inline-flex justify-center items-center text-xl sm:text-2xl md:text-3xl font-serif font-bold transition-all duration-300 ${isVerseOriginActive ? 'text-orange-600 scale-125 drop-shadow-md bg-orange-200 text-orange-900 px-1.5 rounded -translate-y-1 z-30'
-                    : isHovered ? 'text-orange-600 scale-125 -translate-y-1 drop-shadow-md'
+                <span className={`relative inline-flex justify-center items-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold transition-all duration-300 ${isVerseOriginActive ? 'text-orange-600 scale-125 drop-shadow-md bg-orange-200 text-orange-900 px-1.5 md:px-2 rounded -translate-y-1 md:-translate-y-1.5 z-30'
+                    : isHovered ? 'text-orange-600 scale-125 -translate-y-1 md:-translate-y-1.5 drop-shadow-md'
                       : 'text-orange-600/80 hover:text-orange-600'
                   }`}>
                   {item.letter}
@@ -75,7 +75,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                     </span>
                   )}
                 </span>
-                <span className={`text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-wider transition-all duration-300 absolute mt-8 sm:mt-10 ${isHovered ? 'text-orange-600 font-bold opacity-100' : 'text-slate-400 opacity-0'
+                <span className={`text-[8px] sm:text-[10px] uppercase tracking-wider transition-all duration-300 absolute mt-7 sm:mt-8 md:mt-10 lg:mt-12 ${isHovered ? 'text-orange-600 font-bold opacity-100' : 'text-slate-400 opacity-0'
                   }`}>
                   {item.word}
                 </span>
@@ -85,8 +85,8 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
         </div>
 
         {/* COMPLETELY REDESIGNED VERSE TEXT BOX */}
-        <div className="bg-white/40 backdrop-blur-md p-3 sm:p-5 md:p-12 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-sm border border-white/60 w-full max-w-5xl transition-colors duration-500">
-          <div className="flex flex-wrap justify-center items-end gap-x-2 sm:gap-x-3 md:gap-x-4 gap-y-7 sm:gap-y-10 md:gap-y-14 pt-1 sm:pt-2 pb-3 sm:pb-6">
+        <div className="bg-white/40 backdrop-blur-md px-3 py-4 sm:px-5 sm:py-6 md:px-10 md:py-8 lg:p-10 shadow-sm border border-white/60 rounded-xl sm:rounded-2xl md:rounded-3xl w-full max-w-[1300px] transition-colors duration-500">
+          <div className="flex flex-wrap justify-center items-end gap-x-3 sm:gap-x-4 md:gap-x-6 gap-y-6 sm:gap-y-8 md:gap-y-12 pt-1 pb-2 md:pb-4 lg:pb-6">
             {shamarData.verse.subwords.map((item, idx) => {
               if (item.detail.includes("(Word chunk breakdown)")) return null;
 
@@ -101,13 +101,13 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                   onMouseLeave={() => setHoveredVerseIndex(null)}
                 >
                   {/* The Verse Phrase */}
-                  <span className={`text-[12px] sm:text-[14px] leading-tight md:text-2xl lg:text-[26px] font-serif border-b-[2px] pb-1 md:pb-1.5 px-0.5 md:px-1 text-center transition-all duration-300 rounded-t-lg
+                  <span className={`text-[12px] sm:text-[14px] leading-tight md:text-[28px] lg:text-[32px] font-serif border-b-[2px] md:border-b-[3px] pb-1 md:pb-1.5 px-0.5 md:px-1.5 text-center transition-all duration-300 rounded-t-lg
                     ${isHovered ? 'text-orange-950 border-orange-500 bg-orange-100/60 shadow-[0_4px_12px_-4px_rgba(251,146,60,0.3)]' : 'text-slate-800 border-orange-400/60 hover:text-orange-900'}
                   `}>
                     {item.detail}
                   </span>
                   {/* The absolute label */}
-                  <span className={`absolute top-full mt-1.5 md:mt-2.5 font-sans text-[7px] sm:text-[9px] md:text-[13px] font-bold tracking-tight sm:tracking-widest uppercase select-none whitespace-nowrap transition-colors duration-300
+                  <span className={`absolute top-full mt-1 md:mt-2 lg:mt-3 font-sans text-[7px] sm:text-[9px] md:text-[13px] lg:text-[15px] font-bold tracking-tight sm:tracking-widest uppercase select-none whitespace-nowrap transition-colors duration-300
                     ${isHovered ? 'text-orange-700' : 'text-orange-600 opacity-90'}
                   `}>
                     {item.word}

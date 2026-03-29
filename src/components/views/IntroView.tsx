@@ -42,28 +42,28 @@ export const IntroView: React.FC<IntroViewProps> = ({ isActive }) => {
           <div className="flex flex-row items-center">
             <div className="relative flex flex-col items-center" onMouseEnter={() => setHoveredIntroNode('testament')} onMouseLeave={() => setHoveredIntroNode(null)}>
               <div className="px-1.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-full text-[7px] sm:text-[9px] md:text-sm font-bold text-slate-600 uppercase tracking-widest shadow-sm z-10 cursor-default transition-colors hover:border-orange-300">Testament</div>
-              <span className={`absolute top-full mt-1.5 md:mt-2 text-[7px] sm:text-[9px] md:text-xs font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'testament' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>New Testament</span>
+              <span className={`absolute top-1/2 mt-3 sm:mt-4 md:mt-7 lg:mt-9 text-[9px] sm:text-xs md:text-base lg:text-xl font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'testament' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>New Testament</span>
             </div>
 
             <div className="h-px w-2 sm:w-3 md:w-6 lg:w-8 bg-orange-300/80"></div>
 
             <div className="relative flex flex-col items-center" onMouseEnter={() => setHoveredIntroNode('book')} onMouseLeave={() => setHoveredIntroNode(null)}>
               <div className="px-1.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 bg-orange-50/80 backdrop-blur-sm border border-orange-200 rounded-full text-[7px] sm:text-[9px] md:text-base font-bold text-orange-700 uppercase tracking-widest shadow-sm z-10 cursor-default transition-colors hover:border-orange-400">Book</div>
-              <span className={`absolute top-full mt-1.5 md:mt-2 text-[7px] sm:text-[9px] md:text-xs font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'book' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>John</span>
+              <span className={`absolute top-1/2 mt-3 sm:mt-4 md:mt-7 lg:mt-9 text-[9px] sm:text-xs md:text-base lg:text-xl font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'book' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>John</span>
             </div>
 
             <div className="h-px w-2 sm:w-3 md:w-6 lg:w-8 bg-orange-400"></div>
 
             <div className="relative flex flex-col items-center" onMouseEnter={() => setHoveredIntroNode('chapter')} onMouseLeave={() => setHoveredIntroNode(null)}>
               <div className="px-2 py-1.5 sm:px-4 sm:py-2 md:px-6 md:py-3 bg-orange-400 text-white rounded-full text-[8px] sm:text-[10px] md:text-lg font-bold uppercase tracking-widest shadow-md z-10 cursor-default transition-transform hover:scale-105">Chapter</div>
-              <span className={`absolute top-full mt-1.5 md:mt-2 text-[7px] sm:text-[9px] md:text-xs font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'chapter' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>3</span>
+              <span className={`absolute top-1/2 mt-3 sm:mt-4 md:mt-7 lg:mt-9 text-[9px] sm:text-xs md:text-base lg:text-xl font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'chapter' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>3</span>
             </div>
 
             <div className="h-px w-2 sm:w-3 md:w-6 lg:w-8 bg-rose-400"></div>
 
             <div className="relative flex flex-col items-center" onMouseEnter={() => setHoveredIntroNode('verse')} onMouseLeave={() => setHoveredIntroNode(null)}>
               <div className="px-2.5 py-1.5 sm:px-5 sm:py-2 md:px-8 md:py-4 bg-linear-to-r from-orange-500 to-rose-500 text-white rounded-full text-[9px] sm:text-xs md:text-2xl font-bold uppercase tracking-widest shadow-lg shadow-orange-500/30 z-10 cursor-default transition-transform hover:scale-105">Verse</div>
-              <span className={`absolute top-full mt-1.5 md:mt-2 text-[7px] sm:text-[9px] md:text-xs font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'verse' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>16</span>
+              <span className={`absolute top-1/2 mt-3 sm:mt-4 md:mt-7 lg:mt-9 text-[9px] sm:text-xs md:text-base lg:text-xl font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'verse' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>16</span>
             </div>
           </div>
         </div>
