@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ntBooksArray } from '../../data/shamarData';
 
 export interface OriginHighlight {
   isActive: boolean;
@@ -16,6 +15,8 @@ export interface InteractiveAcrosticProps {
   justifyClass?: string;
   onHoverChange?: (idx: number | null) => void;
   externalHoverIdx?: number | null;
+  onAcrosticClick?: (idx: number) => void;
+  interactiveClass?: string;
 }
 
 export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
@@ -27,7 +28,9 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
   textClass = "text-[1.1rem] leading-none sm:text-xl md:text-3xl lg:text-4xl font-serif text-slate-800 tracking-wide font-medium",
   justifyClass = "justify-center",
   onHoverChange,
-  externalHoverIdx = null
+  externalHoverIdx = null,
+  onAcrosticClick,
+  interactiveClass = ""
 }) => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const sections = text.split(',');
@@ -52,14 +55,14 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                   const isHovered = hoveredIdx === currentGlobalIdx || externalHoverIdx === currentGlobalIdx;
 
                   let subText = "";
-                  if (hoverType === 'testament') subText = ntBooksArray[currentGlobalIdx - 1];
+                  if (hoverType === 'testament') subText = `Bk ${currentGlobalIdx}`;
                   else if (hoverType === 'book') subText = `Ch ${currentGlobalIdx}`;
                   else if (hoverType === 'chapter') subText = `Vs ${currentGlobalIdx}`;
 
                   return (
                     <span
                       key={cIdx}
-                      className="relative inline-flex flex-col items-center justify-center cursor-default"
+                      className={`relative inline-flex flex-col items-center justify-center ${interactiveClass}`}
                       onMouseEnter={() => {
                         if (isLetter) {
                           setHoveredIdx(currentGlobalIdx);
@@ -70,6 +73,11 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                         if (isLetter) {
                           setHoveredIdx(null);
                           if (onHoverChange) onHoverChange(null);
+                        }
+                      }}
+                      onClick={() => {
+                        if (isLetter && onAcrosticClick) {
+                            onAcrosticClick(currentGlobalIdx);
                         }
                       }}
                     >

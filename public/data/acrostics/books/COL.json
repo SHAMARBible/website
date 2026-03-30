@@ -1,0 +1,2405 @@
+{
+  "acrostic": "NAME",
+  "chapterPhrase": "",
+  "chapterGroupAcrosticHints": {},
+  "chapters": {
+    "1": {
+      "acrostic": "NOW KEEP PRAYING, FIRST TO BE, MATURE",
+      "chapterPhrase": "",
+      "verses": {
+        "1": {
+          "acrostic": "NAMING",
+          "subwords": [
+            {
+              "letter": "N",
+              "word": "Name",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Apostle",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "M",
+              "word": "Messiah",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Intent",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Name",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "G",
+              "word": "Guy",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "2": {
+          "acrostic": "OFFERS",
+          "subwords": [
+            {
+              "letter": "O",
+              "word": "Ordained",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "F",
+              "word": "Faithful",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "F",
+              "word": "Found",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Earthly",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Regards",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Source",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "3": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "4": {
+          "acrostic": "SAINTS",
+          "subwords": [
+            {
+              "letter": "S",
+              "word": "Story",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Assurance",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "In",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nurture",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Total",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Saints",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "5": {
+          "acrostic": "TRUTH",
+          "subwords": [
+            {
+              "letter": "T",
+              "word": "Treasure",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Realm",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Uttered",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Truth",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "H",
+              "word": "Herald",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "6": {
+          "acrostic": "ORCHARDS",
+          "subwords": [
+            {
+              "letter": "O",
+              "word": "Onboard",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Reach",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "C",
+              "word": "Crop",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "H",
+              "word": "Heaping",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Among",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Reverberated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Discerned",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Salvation",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "7": {
+          "acrostic": "PASTOR",
+          "subwords": [
+            {
+              "letter": "P",
+              "word": "Pupils",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Agent",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Servant",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Trustworthy",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Owner",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Representative",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "8": {
+          "acrostic": "PULSE",
+          "subwords": [
+            {
+              "letter": "P",
+              "word": "Proclaimed",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Us",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "L",
+              "word": "Love",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Sphere",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Essence",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "9": {
+          "acrostic": "REQUEST",
+          "subwords": [
+            {
+              "letter": "R",
+              "word": "Report",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Endless",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "Q",
+              "word": "Querying",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Urging",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Enriched",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Subject",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Thoughts",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "10": {
+          "acrostic": "ABOUND",
+          "subwords": [
+            {
+              "letter": "A",
+              "word": "Along",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "B",
+              "word": "Befitting",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Overflowing",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Undertaking",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Numerous",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Divine",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "11": {
+          "acrostic": "YIELD",
+          "subwords": [
+            {
+              "letter": "Y",
+              "word": "Yoga",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Invigorated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Exalted",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "L",
+              "word": "Lasting",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Delight",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "12": {
+          "acrostic": "INVEST",
+          "subwords": [
+            {
+              "letter": "I",
+              "word": "Indebtedness",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Name",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "V",
+              "word": "Vetted",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Estate",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Saints",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Translucence",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "13": {
+          "acrostic": "NORTH",
+          "subwords": [
+            {
+              "letter": "N",
+              "word": "Navigated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Overcast",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Relocated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Territory",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "H",
+              "word": "Heir",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "14": {
+          "acrostic": "GOD",
+          "subwords": [
+            {
+              "letter": "G",
+              "word": "God",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Owns",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Dismissal",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "15": {
+          "acrostic": "FIRST",
+          "subwords": [
+            {
+              "letter": "F",
+              "word": "Form",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Invisible",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Rank",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Scope",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Things",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "16": {
+          "acrostic": "INVENTIONS",
+          "subwords": [
+            {
+              "letter": "I",
+              "word": "Initiated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nature",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "V",
+              "word": "Visible",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Ethereal",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nobles",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Titles",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Imperials",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Officials",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nexus",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Sake",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "17": {
+          "acrostic": "RANK",
+          "subwords": [
+            {
+              "letter": "R",
+              "word": "Rank",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Arena",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nature",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "K",
+              "word": "Kept",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "18": {
+          "acrostic": "SUPERIOR",
+          "subwords": [
+            {
+              "letter": "S",
+              "word": "Sovereign",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Union",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "P",
+              "word": "People",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Earliest",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Rank",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Immortal",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Overall",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Ruler",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "19": {
+          "acrostic": "TENT",
+          "subwords": [
+            {
+              "letter": "T",
+              "word": "Temple",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Entirety",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Name",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Tabernacle",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "20": {
+          "acrostic": "BROUGHT",
+          "subwords": [
+            {
+              "letter": "B",
+              "word": "By",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Reconcile",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Objects",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Universe",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "G",
+              "word": "Granting",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "H",
+              "word": "Hemoglobin",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Tree",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "21": {
+          "acrostic": "ODDS",
+          "subwords": [
+            {
+              "letter": "O",
+              "word": "Once",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Distant",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Defiant",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Sinning",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "22": {
+          "acrostic": "RECONCILE",
+          "subwords": [
+            {
+              "letter": "R",
+              "word": "Reconciled",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Embodiment",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "C",
+              "word": "Cross",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Order",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "iNtroduce",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "C",
+              "word": "Consecrated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Innocent",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "L",
+              "word": "Lawful",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Examination",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "23": {
+          "acrostic": "NECESSITIES",
+          "subwords": [
+            {
+              "letter": "N",
+              "word": "Needed",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Endurance",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "C",
+              "word": "Constant",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Established",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Stationary",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Security",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Informed",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Transmitted",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Included",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Example",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Servant",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "24": {
+          "acrostic": "MISSIONS",
+          "subwords": [
+            {
+              "letter": "M",
+              "word": "Merriment",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Injuries",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Sake",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Skin",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Increase",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Omission",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nazarene",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Sake",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "25": {
+          "acrostic": "APOSTLE",
+          "subwords": [
+            {
+              "letter": "A",
+              "word": "Apostle",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "P",
+              "word": "Plan",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Origin",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Supplied",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Target",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "L",
+              "word": "Logos",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Entirely",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "26": {
+          "acrostic": "THEIR",
+          "subwords": [
+            {
+              "letter": "T",
+              "word": "Treasure",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "H",
+              "word": "Hidden",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Eras",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Illuminated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Redeemed",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "27": {
+          "acrostic": "UNDERSTAND",
+          "subwords": [
+            {
+              "letter": "U",
+              "word": "Unto",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nominated",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Disclosed",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Ethnicities",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Riches",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Splendor",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Truth",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Anointed",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Nestled",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Destiny",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "28": {
+          "acrostic": "RAISED",
+          "subwords": [
+            {
+              "letter": "R",
+              "word": "Report",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "A",
+              "word": "Admonishing",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Instructing",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Soundly",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Everyone",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Developed",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "29": {
+          "acrostic": "EXCELS",
+          "subwords": [
+            {
+              "letter": "E",
+              "word": "End",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "X",
+              "word": "eXert",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "C",
+              "word": "Contest",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Energy",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "L",
+              "word": "Labors",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Self",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "30": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "31": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "32": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "33": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "34": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "35": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "36": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "37": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "38": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "39": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "40": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "41": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "42": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "43": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "44": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "45": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "46": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "47": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "48": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "49": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "50": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "51": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "52": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "53": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "54": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "55": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "56": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "57": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "58": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "59": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "60": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "61": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "62": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "63": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "64": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "65": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "66": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "67": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "68": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "69": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "70": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "71": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "72": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "73": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "74": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "75": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "76": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "77": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "78": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "79": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "80": {
+          "acrostic": "",
+          "subwords": []
+        }
+      }
+    },
+    "2": {
+      "acrostic": "ALIVE WITH CHRIST, DEBT FREE",
+      "chapterPhrase": "",
+      "verses": {
+        "1": {
+          "acrostic": "ABSENT",
+          "subwords": [
+            {
+              "letter": "A",
+              "word": "Aware",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "B",
+              "word": "Battle",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Sister-city",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Everyone",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Not-seen",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Together",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "2": {
+          "acrostic": "LIMITLESS",
+          "subwords": [
+            {
+              "letter": "L",
+              "word": "Lifted",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Interwoven",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "M",
+              "word": "Matrimony",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Inheritance",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Trust",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "L",
+              "word": "Lucidity",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Enlightenment",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Secret",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "S",
+              "word": "Son",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "3": {
+          "acrostic": "LOCK",
+          "subwords": [
+            {
+              "letter": "L",
+              "word": "Lord",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Obscured",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "C",
+              "word": "Caches",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "K",
+              "word": "Knowledge",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "4": {
+          "acrostic": "ARGUE",
+          "subwords": [
+            {
+              "letter": "A",
+              "word": "Advise",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "R",
+              "word": "Reason",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "G",
+              "word": "Guile",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "U",
+              "word": "Using",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Eloquence",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "5": {
+          "acrostic": "LINKED",
+          "subwords": [
+            {
+              "letter": "L",
+              "word": "Location",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "I",
+              "word": "Involved",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Noticing",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "K",
+              "word": "Knitting",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "E",
+              "word": "Established",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "D",
+              "word": "Devotion",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "6": {
+          "acrostic": "INTO",
+          "subwords": [
+            {
+              "letter": "I",
+              "word": "Import",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "N",
+              "word": "Name",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "T",
+              "word": "Tread",
+              "verseWordCount": 0
+            },
+            {
+              "letter": "O",
+              "word": "Occupy",
+              "verseWordCount": 0
+            }
+          ]
+        },
+        "7": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "8": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "9": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "10": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "11": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "12": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "13": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "14": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "15": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "16": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "17": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "18": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "19": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "20": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "21": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "22": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "23": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "24": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "25": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "26": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "27": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "28": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "29": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "30": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "31": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "32": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "33": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "34": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "35": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "36": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "37": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "38": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "39": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "40": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "41": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "42": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "43": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "44": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "45": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "46": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "47": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "48": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "49": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "50": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "51": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "52": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "53": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "54": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "55": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "56": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "57": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "58": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "59": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "60": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "61": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "62": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "63": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "64": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "65": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "66": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "67": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "68": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "69": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "70": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "71": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "72": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "73": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "74": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "75": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "76": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "77": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "78": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "79": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "80": {
+          "acrostic": "",
+          "subwords": []
+        }
+      }
+    },
+    "3": {
+      "acrostic": "MOVE FORWARD INTO THE NEW LIFE",
+      "chapterPhrase": "",
+      "verses": {
+        "1": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "2": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "3": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "4": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "5": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "6": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "7": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "8": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "9": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "10": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "11": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "12": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "13": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "14": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "15": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "16": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "17": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "18": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "19": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "20": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "21": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "22": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "23": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "24": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "25": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "26": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "27": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "28": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "29": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "30": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "31": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "32": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "33": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "34": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "35": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "36": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "37": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "38": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "39": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "40": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "41": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "42": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "43": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "44": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "45": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "46": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "47": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "48": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "49": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "50": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "51": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "52": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "53": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "54": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "55": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "56": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "57": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "58": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "59": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "60": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "61": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "62": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "63": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "64": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "65": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "66": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "67": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "68": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "69": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "70": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "71": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "72": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "73": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "74": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "75": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "76": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "77": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "78": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "79": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "80": {
+          "acrostic": "",
+          "subwords": []
+        }
+      }
+    },
+    "4": {
+      "acrostic": "EAGER FOR FELLOWSHIP",
+      "chapterPhrase": "",
+      "verses": {
+        "1": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "2": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "3": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "4": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "5": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "6": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "7": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "8": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "9": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "10": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "11": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "12": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "13": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "14": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "15": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "16": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "17": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "18": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "19": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "20": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "21": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "22": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "23": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "24": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "25": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "26": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "27": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "28": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "29": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "30": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "31": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "32": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "33": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "34": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "35": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "36": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "37": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "38": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "39": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "40": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "41": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "42": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "43": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "44": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "45": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "46": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "47": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "48": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "49": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "50": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "51": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "52": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "53": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "54": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "55": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "56": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "57": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "58": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "59": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "60": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "61": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "62": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "63": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "64": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "65": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "66": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "67": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "68": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "69": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "70": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "71": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "72": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "73": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "74": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "75": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "76": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "77": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "78": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "79": {
+          "acrostic": "",
+          "subwords": []
+        },
+        "80": {
+          "acrostic": "",
+          "subwords": []
+        }
+      }
+    }
+  }
+}

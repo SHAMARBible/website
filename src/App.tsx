@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, Home, Maximize, Minimize, Eye, EyeOff } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Home, Maximize, Minimize, Eye, EyeOff, Settings } from 'lucide-react';
 import { GeometricBackground } from './components/shared/GeometricBackground';
-import { shamarData } from './data/shamarData';
+import { SettingsModal } from './components/shared/SettingsModal';
+import { useAppContext } from './contexts/AppContext';
+import { BIBLE_BOOKS } from './data/metadata/bibleBooks';
 
 // View Components
 import { IntroView } from './components/views/IntroView';
@@ -11,10 +13,13 @@ import { ChapterView } from './components/views/ChapterView';
 import { VerseView } from './components/views/VerseView';
 
 export default function App() {
+  const { targetBookId, targetChapter, targetVerse, explorationMode, setExplorationMode } = useAppContext();
   const [currentStep, setCurrentStep] = useState(0);
   const [presentationMode, setPresentationMode] = useState(false);
   const [showAcrosticBreadcrumbs, setShowAcrosticBreadcrumbs] = useState(false);
   const [hoveredLevel, setHoveredLevel] = useState<string | null>(null);
+
+  const activeBookName = BIBLE_BOOKS[targetBookId]?.name || "Book";
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -52,7 +57,7 @@ export default function App() {
 
       <div className="relative z-10 flex flex-col h-dvh w-full max-w-dvw p-2 sm:p-4 md:p-12">
 
-        <header className={`shrink-0 transition-all duration-700 ease-in-out flex justify-between items-start w-full gap-2 mb-2 sm:mb-4 md:mb-6 lg:mb-8`}>
+        <header className={`relative z-50 shrink-0 transition-all duration-700 ease-in-out flex justify-between items-start w-full gap-2 mb-2 sm:mb-4 md:mb-6 lg:mb-8`}>
           {/* Left: Breadcrumbs */}
           <div className={`flex flex-wrap items-center gap-1 sm:gap-2 text-[10px] sm:text-xs md:text-base text-slate-600 font-medium tracking-wide transition-opacity duration-700 ease-in-out ${currentStep === 0 ? 'opacity-0 pointer-events-none' : 'opacity-100'} flex-1`}>
             <button onClick={() => goToStep(0)} className="hover:text-orange-600 transition-colors flex items-center bg-white/40 px-2 flex-shrink-0 whitespace-nowrap py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm">
@@ -61,38 +66,38 @@ export default function App() {
             
             {currentStep >= 1 && (
               <>
-                <ChevronRight size={12} className="text-slate-400 flex-shrink-0 md:w-4 md:h-4" />
-                <button onClick={() => goToStep(1)} className={`flex-shrink-0 whitespace-nowrap hover:text-orange-600 transition-colors bg-white/40 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm ${currentStep === 1 ? 'text-orange-800 font-bold border-orange-300' : ''}`}>
-                  <span className="hidden sm:inline">{shamarData.testament.name}</span>
-                  <span className="sm:hidden">NT</span>
+                <ChevronRight size={12} className="text-slate-400 shrink-0 md:w-4 md:h-4" />
+                <button onClick={() => goToStep(1)} className={`shrink-0 whitespace-nowrap hover:text-orange-600 transition-colors bg-white/40 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm ${currentStep === 1 ? 'text-orange-800 font-bold border-orange-300' : ''}`}>
+                  <span className="hidden sm:inline">Testament</span>
+                  <span className="sm:hidden">Test</span>
                 </button>
               </>
             )}
 
             {currentStep >= 2 && (
               <>
-                <ChevronRight size={12} className="text-slate-400 flex-shrink-0 md:w-4 md:h-4" />
-                <button onClick={() => goToStep(2)} className={`flex-shrink-0 whitespace-nowrap hover:text-orange-600 transition-colors bg-white/40 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm ${currentStep === 2 ? 'text-orange-800 font-bold border-orange-300' : ''}`}>
-                  {shamarData.book.name}
+                <ChevronRight size={12} className="text-slate-400 shrink-0 md:w-4 md:h-4" />
+                <button onClick={() => goToStep(2)} className={`shrink-0 whitespace-nowrap hover:text-orange-600 transition-colors bg-white/40 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm ${currentStep === 2 ? 'text-orange-800 font-bold border-orange-300' : ''}`}>
+                  {activeBookName}
                 </button>
               </>
             )}
 
             {currentStep >= 3 && (
               <>
-                <ChevronRight size={12} className="text-slate-400 flex-shrink-0 md:w-4 md:h-4" />
-                <button onClick={() => goToStep(3)} className={`flex-shrink-0 whitespace-nowrap hover:text-orange-600 transition-colors bg-white/40 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm ${currentStep === 3 ? 'text-orange-800 font-bold border-orange-300' : ''}`}>
-                  <span className="hidden sm:inline">{shamarData.chapter.name}</span>
-                  <span className="sm:hidden">Ch {shamarData.chapter.name.replace('Chapter ', '')}</span>
+                <ChevronRight size={12} className="text-slate-400 shrink-0 md:w-4 md:h-4" />
+                <button onClick={() => goToStep(3)} className={`shrink-0 whitespace-nowrap hover:text-orange-600 transition-colors bg-white/40 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-white/50 shadow-sm backdrop-blur-sm ${currentStep === 3 ? 'text-orange-800 font-bold border-orange-300' : ''}`}>
+                  <span className="hidden sm:inline">Chapter {targetChapter}</span>
+                  <span className="sm:hidden">Ch {targetChapter}</span>
                 </button>
               </>
             )}
 
             {currentStep >= 4 && (
               <>
-                <ChevronRight size={12} className="text-slate-400 flex-shrink-0 md:w-4 md:h-4" />
-                <span className="flex-shrink-0 whitespace-nowrap bg-orange-100/80 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-orange-300 shadow-sm backdrop-blur-sm text-orange-800 font-bold">
-                  {shamarData.verse.name.replace('Verse ', 'v')}
+                <ChevronRight size={12} className="text-slate-400 shrink-0 md:w-4 md:h-4" />
+                <span className="shrink-0 whitespace-nowrap bg-orange-100/80 px-2 py-1 md:px-3 md:py-1.5 rounded-full border border-orange-300 shadow-sm backdrop-blur-sm text-orange-800 font-bold">
+                  v {targetVerse}
                 </span>
               </>
             )}
@@ -125,14 +130,18 @@ export default function App() {
             <button onClick={() => setShowAcrosticBreadcrumbs(!showAcrosticBreadcrumbs)} className={`p-0.5 md:p-1 lg:p-1.5 transition-colors ${showAcrosticBreadcrumbs ? 'text-orange-600' : 'text-slate-500 hover:text-orange-600'}`} title="Toggle Acrostic Hierarchy Mapping">
               {showAcrosticBreadcrumbs ? <EyeOff size={14} className="md:w-4 md:h-4" /> : <Eye size={14} className="md:w-4 md:h-4" />}
             </button>
+
+            <div className="w-px h-3 md:h-4 lg:h-5 bg-slate-300/80 mx-0.5 md:mx-1"></div>
+
+            <SettingsModal />
           </div>
         </header>
 
         <main className="grow relative w-full overflow-hidden rounded-xl md:rounded-3xl">
-          <IntroView isActive={currentStep === 0} />
-          <TestamentView isActive={currentStep === 1} />
-          <BookView isActive={currentStep === 2} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} />
-          <ChapterView isActive={currentStep === 3} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} />
+          <IntroView isActive={currentStep === 0} setExplorationMode={setExplorationMode} goToStep={goToStep} />
+          <TestamentView isActive={currentStep === 1} goToStep={goToStep} />
+          <BookView isActive={currentStep === 2} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
+          <ChapterView isActive={currentStep === 3} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
           <VerseView isActive={currentStep === 4} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} />
         </main>
 

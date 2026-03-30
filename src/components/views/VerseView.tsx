@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronRight, Loader2 } from 'lucide-react';
 import { HighlightedAcrostic } from '../shared/HighlightedAcrostic';
-import { shamarData, fullTestamentAcrostic } from '../../data/shamarData';
+import { useAppContext } from '../../contexts/AppContext';
+import { BIBLE_BOOKS, BIBLE_BOOK_ORDER, getAbsoluteCharIndex } from '../../data/metadata/bibleBooks';
+import { fetchBookAcrostics, fetchTestamentsOverview, BookAcrostic, TestamentsData } from '../../api/acrosticFetcher';
+
+const DUMMY_LOREM = [
+  "lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "adipiscing", "elit", "sed", "do", "eiusmod", "tempor", "incididunt", "ut", "labore", "et", "dolore", "magna", "aliqua", "enim", "ad", "minim", "veniam", "quis", "nostrud", "exercitation", "ullamco", "laboris", "nisi", "ut", "aliquip", "ex", "ea", "commodo", "consequat", "duis", "aute", "irure", "dolor", "in", "reprehenderit", "in", "voluptate", "velit", "esse", "cillum", "dolore", "eu", "fugiat", "nulla", "pariatur", "excepteur", "sint", "occaecat", "cupidatat", "non", "proident", "sunt", "in", "culpa", "qui", "officia", "deserunt", "mollit", "anim", "id", "est", "laborum"
+];
 
 export interface VerseViewProps {
   isActive: boolean;
@@ -11,45 +17,106 @@ export interface VerseViewProps {
 }
 
 export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBreadcrumbs, hoveredLevel, setHoveredLevel }) => {
+  const { targetBookId, targetChapter, targetVerse } = useAppContext();
   const [hoveredVerseIndex, setHoveredVerseIndex] = useState<number | null>(null);
+  
+  const [bookData, setBookData] = useState<BookAcrostic | null>(null);
+  const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Determine Testament context
+  const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
+  const isOT = globalIndex < 39;
+  const localBookIndex = isOT ? globalIndex + 1 : globalIndex - 39 + 1;
+  const bookMeta = BIBLE_BOOKS[targetBookId];
+
+  useEffect(() => {
+    if (!isActive && !bookData) return;
+    
+    setLoading(true);
+    Promise.all([
+      fetchBookAcrostics(targetBookId),
+      fetchTestamentsOverview()
+    ]).then(([bd, td]) => {
+      setBookData(bd);
+      setTestamentData(td);
+      setLoading(false);
+    }).catch(err => {
+      console.error(err);
+      setLoading(false);
+    });
+  }, [targetBookId, isActive]);
+
+  if (loading || !bookData || !testamentData) {
+    return (
+      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <Loader2 className="animate-spin text-orange-500 w-8 h-8 md:w-12 md:h-12" />
+      </div>
+    );
+  }
+
+  const testamentAcrosticString = isOT ? testamentData.testaments.OT.acrostic : testamentData.testaments.NT.acrostic;
+  
+  // Testament Level Pointers
+  const targetTestamentCharIndex = getAbsoluteCharIndex(testamentAcrosticString, localBookIndex);
+  const targetTestamentLetter = targetTestamentCharIndex !== -1 ? testamentAcrosticString[targetTestamentCharIndex] : '?';
+
+  // Book Level Pointers
+  const targetChapterNum = parseInt(targetChapter);
+  const targetBookCharIndex = getAbsoluteCharIndex(bookData.acrostic, targetChapterNum);
+  const targetBookLetter = targetBookCharIndex !== -1 ? bookData.acrostic[targetBookCharIndex] : '?';
+
+  // Chapter Data
+  const chapterData = bookData.chapters[targetChapter];
+  if (!chapterData) return null;
+  
+  // Verse Data Pointers
+  const targetVerseNum = parseInt(targetVerse);
+  const targetChapterCharIndex = getAbsoluteCharIndex(chapterData.acrostic, targetVerseNum);
+  const targetChapterLetter = targetChapterCharIndex !== -1 ? chapterData.acrostic[targetChapterCharIndex] : '?';
+  
+  const verseData = chapterData.verses[targetVerse];
+  if (!verseData) return null;
+
+  const verseCount = Object.keys(chapterData.verses).length;
 
   return (
     <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-      <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4 max-w-[1400px] mx-auto px-2 sm:px-4">
+      <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4 max-w-350 mx-auto px-2 sm:px-4">
         {showAcrosticBreadcrumbs && (
-          <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full max-w-[1400px]">
+          <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full max-w-350 mt-4 md:mt-0">
             <HighlightedAcrostic
-              text={fullTestamentAcrostic}
-              pointerIndex={27} pointerTooltip="Y ➔ Revelation" isPointerActive={hoveredLevel === 'testament'}
-              label="Testament Acrostic" subLabel={`(${shamarData.testament.bookCount} Books)`}
+              text={testamentAcrosticString}
+              pointerIndex={targetTestamentCharIndex} pointerTooltip={`${targetTestamentLetter} ➔ ${bookMeta.name}`} isPointerActive={hoveredLevel === 'testament'}
+              label="Testament Acrostic" subLabel={`(${isOT ? 39 : 27} Books)`}
               onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
             />
             <ChevronRight className={`hidden lg:block w-3.5 h-3.5 transition-colors duration-300 ${hoveredLevel === 'testament' ? 'text-orange-500 scale-125' : 'text-orange-300/80'}`} />
 
             <HighlightedAcrostic
-              text={shamarData.book.acrostic}
-              originIndex={1} originTooltip="Y ⟵ 27th Book" isOriginActive={hoveredLevel === 'testament'}
-              pointerIndex={2} pointerTooltip="E ➔ Chapter 2" isPointerActive={hoveredLevel === 'book'}
-              label="Book Acrostic" subLabel={`(${shamarData.book.chapters} Chapters)`}
+              text={bookData.acrostic}
+              originIndex={targetTestamentCharIndex} originTooltip={`${targetTestamentLetter} ⟵ ${localBookIndex}${localBookIndex === 1 ? 'st' : localBookIndex === 2 ? 'nd' : localBookIndex === 3 ? 'rd' : 'th'} Book`} isOriginActive={hoveredLevel === 'testament'}
+              pointerIndex={targetBookCharIndex} pointerTooltip={`${targetBookLetter} ➔ Chapter ${targetChapter}`} isPointerActive={hoveredLevel === 'book'}
+              label="Book Acrostic" subLabel={`(${bookMeta.verses.length} Chapters)`}
               onHoverEnter={() => setHoveredLevel('book')} onHoverLeave={() => setHoveredLevel(null)}
             />
             <ChevronRight className={`hidden lg:block w-3.5 h-3.5 transition-colors duration-300 ${hoveredLevel === 'book' ? 'text-orange-500 scale-125' : 'text-orange-300/80'}`} />
 
             <HighlightedAcrostic
-              text={shamarData.chapter.acrostic}
-              originIndex={1} originTooltip="E ⟵ Chapter 2" isOriginActive={hoveredLevel === 'book'}
-              pointerIndex={10} pointerTooltip="Y ➔ Verse 10" isPointerActive={hoveredLevel === 'chapter'}
-              label="Chapter Acrostic" subLabel={`(${shamarData.chapter.verses} Verses)`}
+              text={chapterData.acrostic}
+              originIndex={targetBookCharIndex} originTooltip={`${targetBookLetter} ⟵ Chapter ${targetChapter}`} isOriginActive={hoveredLevel === 'book'}
+              pointerIndex={targetChapterCharIndex} pointerTooltip={`${targetChapterLetter} ➔ Verse ${targetVerse}`} isPointerActive={hoveredLevel === 'chapter'}
+              label="Chapter Acrostic" subLabel={`(${verseCount} Verses)`}
               onHoverEnter={() => setHoveredLevel('chapter')} onHoverLeave={() => setHoveredLevel(null)}
             />
           </div>
         )}
         <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 font-semibold text-[10px] md:text-[11px]">Verse Level</h3>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-2 md:mb-4 text-slate-800 text-center">{shamarData.target}</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-2 md:mb-4 text-slate-800 text-center">{bookMeta.name} {targetChapter}:{targetVerse}</h2>
 
         {/* Subtle Acrostic Word Display */}
         <div className="flex flex-wrap justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 mb-2 md:mb-4 lg:mb-6">
-          {shamarData.verse.subwords.map((item, idx) => {
+          {verseData.subwords.map((item, idx) => {
             const isVerseOriginActive = hoveredLevel === 'chapter' && idx === 0;
             const isHovered = hoveredVerseIndex === idx;
             const isFaded = hoveredVerseIndex !== null && hoveredVerseIndex !== idx;
@@ -61,7 +128,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                 onMouseEnter={() => setHoveredVerseIndex(idx)}
                 onMouseLeave={() => setHoveredVerseIndex(null)}
               >
-                <span className={`relative inline-flex justify-center items-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold transition-all duration-300 ${isVerseOriginActive ? 'text-orange-600 scale-125 drop-shadow-md bg-orange-200 text-orange-900 px-1.5 md:px-2 rounded -translate-y-1 md:-translate-y-1.5 z-30'
+                <span className={`relative inline-flex justify-center items-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif font-bold transition-all duration-300 ${isVerseOriginActive ? 'scale-125 drop-shadow-md bg-orange-200 text-orange-900 px-1.5 md:px-2 rounded -translate-y-1 md:-translate-y-1.5 z-30'
                     : isHovered ? 'text-orange-600 scale-125 -translate-y-1 md:-translate-y-1.5 drop-shadow-md'
                       : 'text-orange-600/80 hover:text-orange-600'
                   }`}>
@@ -70,7 +137,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                   {isVerseOriginActive && (
                     <span className="absolute bottom-full left-1/2 w-0 flex justify-center z-50">
                       <span className="mb-2 md:mb-3 whitespace-nowrap text-[8px] md:text-[10px] font-sans font-bold text-white bg-slate-700 px-1.5 md:px-2.5 py-0.5 md:py-1 rounded shadow-md pointer-events-none after:content-[''] after:absolute after:top-full after:left-1/2 after:-translate-x-1/2 after:border-4 after:border-transparent after:border-t-slate-700 animate-fade-in-up tracking-wider">
-                        Y ⟵ 10th Verse
+                        {targetChapterLetter} ⟵ Verse {targetVerse}
                       </span>
                     </span>
                   )}
@@ -84,37 +151,54 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
           })}
         </div>
 
-        {/* COMPLETELY REDESIGNED VERSE TEXT BOX */}
-        <div className="bg-white/40 backdrop-blur-md px-3 py-4 sm:px-5 sm:py-6 md:px-10 md:py-8 lg:p-10 shadow-sm border border-white/60 rounded-xl sm:rounded-2xl md:rounded-3xl w-full max-w-[1300px] transition-colors duration-500">
+        {/* Mnemonic Verse Representation Box */}
+        <div className="bg-white/40 backdrop-blur-md px-3 py-4 sm:px-5 sm:py-6 md:px-10 md:py-8 lg:p-10 shadow-sm border border-white/60 rounded-xl sm:rounded-2xl md:rounded-3xl w-full max-w-325 transition-colors duration-500">
           <div className="flex flex-wrap justify-center items-end gap-x-3 sm:gap-x-4 md:gap-x-6 gap-y-6 sm:gap-y-8 md:gap-y-12 pt-1 pb-2 md:pb-4 lg:pb-6">
-            {shamarData.verse.subwords.map((item, idx) => {
-              if (item.detail.includes("(Word chunk breakdown)")) return null;
+            {(() => {
+              let currentLoremIdx = 0;
+              return verseData.subwords.map((item, idx) => {
+                const isHovered = hoveredVerseIndex === idx;
+                const isFaded = hoveredVerseIndex !== null && hoveredVerseIndex !== idx;
+                
+                // Determine how many words to grab for this dummy chunk
+                let count = item.verseWordCount;
+                if (!count || count <= 0) {
+                   count = (idx % 3) + 2; // fallback deterministically to 2, 3, or 4 words
+                }
+                
+                // Grab the chunk
+                const chunkWords: string[] = [];
+                for (let i = 0; i < count; i++) {
+                   chunkWords.push(DUMMY_LOREM[currentLoremIdx % DUMMY_LOREM.length]);
+                   currentLoremIdx++;
+                }
 
-              const isHovered = hoveredVerseIndex === idx;
-              const isFaded = hoveredVerseIndex !== null && hoveredVerseIndex !== idx;
+                // Capitalize first letter of the chunk
+                const chunkText = chunkWords.join(" ").replace(/^./, (c) => c.toUpperCase());
 
-              return (
-                <div
-                  key={idx}
-                  className={`relative flex flex-col items-center max-w-full cursor-default transition-all duration-300 ${isFaded ? 'opacity-30 grayscale-[30%]' : 'opacity-100'}`}
-                  onMouseEnter={() => setHoveredVerseIndex(idx)}
-                  onMouseLeave={() => setHoveredVerseIndex(null)}
-                >
-                  {/* The Verse Phrase */}
-                  <span className={`text-[12px] sm:text-[14px] leading-tight md:text-[28px] lg:text-[32px] font-serif border-b-[2px] md:border-b-[3px] pb-1 md:pb-1.5 px-0.5 md:px-1.5 text-center transition-all duration-300 rounded-t-lg
-                    ${isHovered ? 'text-orange-950 border-orange-500 bg-orange-100/60 shadow-[0_4px_12px_-4px_rgba(251,146,60,0.3)]' : 'text-slate-800 border-orange-400/60 hover:text-orange-900'}
-                  `}>
-                    {item.detail}
-                  </span>
-                  {/* The absolute label */}
-                  <span className={`absolute top-full mt-1 md:mt-2 lg:mt-3 font-sans text-[7px] sm:text-[9px] md:text-[13px] lg:text-[15px] font-bold tracking-tight sm:tracking-widest uppercase select-none whitespace-nowrap transition-colors duration-300
-                    ${isHovered ? 'text-orange-700' : 'text-orange-600 opacity-90'}
-                  `}>
-                    {item.word}
-                  </span>
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={idx}
+                    className={`relative flex flex-col items-center max-w-full cursor-default transition-all duration-300 ${isFaded ? 'opacity-30 grayscale-30' : 'opacity-100'}`}
+                    onMouseEnter={() => setHoveredVerseIndex(idx)}
+                    onMouseLeave={() => setHoveredVerseIndex(null)}
+                  >
+                    {/* The Verse Phrase Chunk (Lorem Ipsum Dummy) */}
+                    <span className={`text-[12px] sm:text-[14px] leading-tight md:text-[28px] lg:text-[32px] font-serif border-b-2 md:border-b-[3px] pb-1 md:pb-1.5 px-0.5 md:px-1.5 text-center transition-all duration-300 rounded-t-lg
+                      ${isHovered ? 'text-orange-950 border-orange-500 bg-orange-100/60 shadow-[0_4px_12px_-4px_rgba(251,146,60,0.3)]' : 'text-slate-800 border-orange-400/60 hover:text-orange-900'}
+                    `}>
+                      {chunkText}
+                    </span>
+                    {/* The Mnemonic Acrostic Word Label */}
+                    <span className={`absolute top-full mt-1 md:mt-2 lg:mt-3 font-sans text-[7px] sm:text-[9px] md:text-[13px] lg:text-[15px] font-bold tracking-tight sm:tracking-widest uppercase select-none whitespace-nowrap transition-colors duration-300
+                      ${isHovered ? 'text-orange-700' : 'text-orange-600 opacity-90'}
+                    `}>
+                      {item.word || "?"}
+                    </span>
+                  </div>
+                );
+              });
+            })()}
           </div>
         </div>
 

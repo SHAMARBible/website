@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "Hierarchical acrostics for Shamar Bible memorization fetched from Google Sheets"
+  },
+  "testaments": {
+    "OT": {
+      "acrostic": "IN THE HISTORY BOOKS TRULY WE SEE A PERFECT PLAN",
+      "bookGroupAcrosticHints": {}
+    },
+    "NT": {
+      "acrostic": "JESUS GAVE US NEW LIFE ETERNALLY",
+      "bookGroupAcrosticHints": {}
+    }
+  }
+}
