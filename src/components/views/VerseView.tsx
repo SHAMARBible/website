@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronRight, Loader2 } from 'lucide-react';
 import { HighlightedAcrostic } from '../shared/HighlightedAcrostic';
 import { useAppContext } from '../../contexts/AppContext';
-import { BIBLE_BOOKS, BIBLE_BOOK_ORDER, getAbsoluteCharIndex } from '../../data/metadata/bibleBooks';
+import { BIBLE_BOOKS, BIBLE_BOOK_ORDER, getAcrosticLetter } from '../../data/metadata/bibleBooks';
 import { fetchBookAcrostics, fetchTestamentsOverview, BookAcrostic, TestamentsData } from '../../api/acrosticFetcher';
 
 const DUMMY_LOREM = [
@@ -57,14 +57,11 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
 
   const testamentAcrosticString = isOT ? testamentData.testaments.OT.acrostic : testamentData.testaments.NT.acrostic;
   
-  // Testament Level Pointers
-  const targetTestamentCharIndex = getAbsoluteCharIndex(testamentAcrosticString, localBookIndex);
-  const targetTestamentLetter = targetTestamentCharIndex !== -1 ? testamentAcrosticString[targetTestamentCharIndex] : '?';
+  const targetTestamentLetter = getAcrosticLetter(testamentAcrosticString, localBookIndex);
 
   // Book Level Pointers
   const targetChapterNum = parseInt(targetChapter);
-  const targetBookCharIndex = getAbsoluteCharIndex(bookData.acrostic, targetChapterNum);
-  const targetBookLetter = targetBookCharIndex !== -1 ? bookData.acrostic[targetBookCharIndex] : '?';
+  const targetBookLetter = getAcrosticLetter(bookData.acrostic, targetChapterNum);
 
   // Chapter Data
   const chapterData = bookData.chapters[targetChapter];
@@ -72,13 +69,13 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
   
   // Verse Data Pointers
   const targetVerseNum = parseInt(targetVerse);
-  const targetChapterCharIndex = getAbsoluteCharIndex(chapterData.acrostic, targetVerseNum);
-  const targetChapterLetter = targetChapterCharIndex !== -1 ? chapterData.acrostic[targetChapterCharIndex] : '?';
+  const targetChapterLetter = getAcrosticLetter(chapterData.acrostic, targetVerseNum);
   
   const verseData = chapterData.verses[targetVerse];
   if (!verseData) return null;
 
-  const verseCount = Object.keys(chapterData.verses).length;
+  // Accurate verse count from metadata
+  const verseCount = bookMeta.verses[targetChapterNum - 1];
 
   return (
     <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
@@ -87,26 +84,29 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
           <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full max-w-350 mt-4 md:mt-0">
             <HighlightedAcrostic
               text={testamentAcrosticString}
-              pointerIndex={targetTestamentCharIndex} pointerTooltip={`${targetTestamentLetter} ➔ ${bookMeta.name}`} isPointerActive={hoveredLevel === 'testament'}
+              pointerIndex={localBookIndex} pointerTooltip={`${targetTestamentLetter} ➔ ${bookMeta.name}`} isPointerActive={hoveredLevel === 'testament'}
               label="Testament Acrostic" subLabel={`(${isOT ? 39 : 27} Books)`}
+              referenceLabel={isOT ? "Old Testament" : "New Testament"}
               onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
             />
             <ChevronRight className={`hidden lg:block w-3.5 h-3.5 transition-colors duration-300 ${hoveredLevel === 'testament' ? 'text-orange-500 scale-125' : 'text-orange-300/80'}`} />
 
             <HighlightedAcrostic
               text={bookData.acrostic}
-              originIndex={targetTestamentCharIndex} originTooltip={`${targetTestamentLetter} ⟵ ${localBookIndex}${localBookIndex === 1 ? 'st' : localBookIndex === 2 ? 'nd' : localBookIndex === 3 ? 'rd' : 'th'} Book`} isOriginActive={hoveredLevel === 'testament'}
-              pointerIndex={targetBookCharIndex} pointerTooltip={`${targetBookLetter} ➔ Chapter ${targetChapter}`} isPointerActive={hoveredLevel === 'book'}
+              originIndex={1} originTooltip={`${targetTestamentLetter} ⟵ ${localBookIndex}${localBookIndex === 1 ? 'st' : localBookIndex === 2 ? 'nd' : localBookIndex === 3 ? 'rd' : 'th'} Book`} isOriginActive={hoveredLevel === 'testament'}
+              pointerIndex={targetChapterNum} pointerTooltip={`${targetBookLetter} ➔ Chapter ${targetChapter}`} isPointerActive={hoveredLevel === 'book'}
               label="Book Acrostic" subLabel={`(${bookMeta.verses.length} Chapters)`}
+              referenceLabel={bookMeta.name}
               onHoverEnter={() => setHoveredLevel('book')} onHoverLeave={() => setHoveredLevel(null)}
             />
             <ChevronRight className={`hidden lg:block w-3.5 h-3.5 transition-colors duration-300 ${hoveredLevel === 'book' ? 'text-orange-500 scale-125' : 'text-orange-300/80'}`} />
 
             <HighlightedAcrostic
               text={chapterData.acrostic}
-              originIndex={targetBookCharIndex} originTooltip={`${targetBookLetter} ⟵ Chapter ${targetChapter}`} isOriginActive={hoveredLevel === 'book'}
-              pointerIndex={targetChapterCharIndex} pointerTooltip={`${targetChapterLetter} ➔ Verse ${targetVerse}`} isPointerActive={hoveredLevel === 'chapter'}
+              originIndex={1} originTooltip={`${targetBookLetter} ⟵ Chapter ${targetChapter}`} isOriginActive={hoveredLevel === 'book'}
+              pointerIndex={targetVerseNum} pointerTooltip={`${targetChapterLetter} ➔ Verse ${targetVerse}`} isPointerActive={hoveredLevel === 'chapter'}
               label="Chapter Acrostic" subLabel={`(${verseCount} Verses)`}
+              referenceLabel={`Chapter ${targetChapter}`}
               onHoverEnter={() => setHoveredLevel('chapter')} onHoverLeave={() => setHoveredLevel(null)}
             />
           </div>

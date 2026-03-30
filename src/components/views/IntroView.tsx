@@ -19,7 +19,7 @@ export const IntroView: React.FC<IntroViewProps> = ({ isActive, setExplorationMo
           <AcronymLetter letter="H" fullWord="Hierarchical" delayClass="delay-300" />
           <AcronymLetter letter="A" fullWord="Acrostic" delayClass="delay-500" />
 
-        <div className="flex flex-col justify-end pb-px md:pb-1 opacity-0 animate-fade-in-up delay-600 -mx-1 sm:-mx-1.5 md:-mx-2.5 lg:-mx-4 z-10">
+          <div className="flex flex-col justify-end pb-px md:pb-1 opacity-0 animate-fade-in-up delay-600 -mx-1 sm:-mx-1.5 md:-mx-2.5 lg:-mx-4 z-10">
             <span className="text-[9px] sm:text-xs md:text-base lg:text-2xl font-serif italic text-slate-400">for</span>
           </div>
 
@@ -67,24 +67,6 @@ export const IntroView: React.FC<IntroViewProps> = ({ isActive, setExplorationMo
               <div className="px-2.5 py-1.5 sm:px-5 sm:py-2 md:px-8 md:py-4 bg-linear-to-r from-orange-500 to-rose-500 text-white rounded-full text-[9px] sm:text-xs md:text-2xl font-bold uppercase tracking-widest shadow-lg shadow-orange-500/30 z-10 cursor-default transition-transform hover:scale-105">Verse</div>
               <span className={`absolute top-1/2 mt-3 sm:mt-4 md:mt-7 lg:mt-9 text-[9px] sm:text-xs md:text-base lg:text-xl font-serif font-bold text-orange-600 transition-all duration-300 whitespace-nowrap pointer-events-none ${hoveredIntroNode === 'verse' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1'}`}>16</span>
             </div>
-          </div>
-        </div>
-
-        <div className="max-w-4xl w-full opacity-0 animate-fade-in-up delay-1600 mb-2 sm:mb-3 md:mb-4 px-2 md:px-6 text-center">
-          <p className="text-[10px] sm:text-xs md:text-xl text-slate-600 font-medium leading-normal sm:leading-relaxed bg-white/30 p-2 sm:p-3 md:p-5 lg:p-6 rounded-lg sm:rounded-xl border border-white/50 shadow-sm backdrop-blur-sm">
-            The SHAMAR system uses nested acrostics to map the hierarchical structure of Scripture. By memorizing a continuous chain of phrases, you can mentally drill down from a whole Testament into the exact wording of a single verse.
-          </p>
-
-          <div className="mt-4 md:mt-8 flex justify-center">
-            <button 
-              onClick={() => {
-                setExplorationMode(true);
-                goToStep(1);
-              }}
-              className="text-xs md:text-base font-bold text-orange-600 border border-orange-300 bg-white/50 hover:bg-orange-100 hover:text-orange-700 rounded-full px-6 py-2 transition-all shadow-sm"
-            >
-              How this works (Explorer Mode)
-            </button>
           </div>
         </div>
 

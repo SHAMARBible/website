@@ -10,6 +10,7 @@ export interface HighlightedAcrosticProps {
   isOriginActive?: boolean;
   label: string;
   subLabel?: string;
+  referenceLabel?: string;
   onHoverEnter: () => void;
   onHoverLeave: () => void;
 }
@@ -24,6 +25,7 @@ export const HighlightedAcrostic: React.FC<HighlightedAcrosticProps> = ({
   isOriginActive,
   label,
   subLabel,
+  referenceLabel,
   onHoverEnter,
   onHoverLeave
 }) => {
@@ -37,11 +39,18 @@ export const HighlightedAcrostic: React.FC<HighlightedAcrosticProps> = ({
       onMouseEnter={onHoverEnter}
       onMouseLeave={onHoverLeave}
     >
-      <div className="flex items-center space-x-1 md:space-x-1.5 mb-1 md:mb-1.5">
-        <span className="text-[7px] md:text-[9px] uppercase tracking-widest text-slate-500 font-semibold">{label}</span>
-        {subLabel && (
-          <span className="text-[6px] md:text-[8px] uppercase tracking-widest text-orange-500/90 font-bold">
-            {subLabel}
+      <div className="flex flex-col items-center mb-1 md:mb-2">
+        <div className="flex items-center space-x-1 md:space-x-1.5">
+          <span className="text-[7px] md:text-[9px] uppercase tracking-widest text-slate-500 font-semibold">{label}</span>
+          {subLabel && (
+            <span className="text-[6px] md:text-[8px] uppercase tracking-widest text-orange-500/90 font-bold">
+              {subLabel}
+            </span>
+          )}
+        </div>
+        {referenceLabel && (
+          <span className="text-[9px] md:text-[11px] uppercase tracking-widest text-slate-700 font-bold mt-0.5 md:mt-1 font-sans">
+            {referenceLabel}
           </span>
         )}
       </div>

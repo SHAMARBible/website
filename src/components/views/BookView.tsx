@@ -3,7 +3,7 @@ import { BookOpen, Loader2 } from 'lucide-react';
 import { HighlightedAcrostic } from '../shared/HighlightedAcrostic';
 import { InteractiveAcrostic } from '../shared/InteractiveAcrostic';
 import { useAppContext } from '../../contexts/AppContext';
-import { BIBLE_BOOKS, BIBLE_BOOK_ORDER, getAbsoluteCharIndex } from '../../data/metadata/bibleBooks';
+import { BIBLE_BOOKS, BIBLE_BOOK_ORDER, getAcrosticLetter } from '../../data/metadata/bibleBooks';
 import { fetchBookAcrostics, fetchTestamentsOverview, BookAcrostic, TestamentsData } from '../../api/acrosticFetcher';
 
 export interface BookViewProps {
@@ -52,8 +52,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
   }
 
   const testamentAcrosticString = isOT ? testamentData.testaments.OT.acrostic : testamentData.testaments.NT.acrostic;
-  const targetCharIndex = getAbsoluteCharIndex(testamentAcrosticString, localBookIndex);
-  const targetLetter = targetCharIndex !== -1 ? testamentAcrosticString[targetCharIndex] : '?';
+  const targetTestamentLetter = getAcrosticLetter(testamentAcrosticString, localBookIndex);
 
   return (
     <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
@@ -62,13 +61,10 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
           <div className="flex flex-wrap justify-center items-center gap-2 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full px-2 mt-4 md:mt-0">
             <HighlightedAcrostic
               text={testamentAcrosticString}
-              pointerIndex={targetCharIndex} 
-              pointerTooltip={`${targetLetter} ➔ ${bookMeta.name}`} 
-              isPointerActive={hoveredLevel === 'testament'}
-              label="Testament Acrostic" 
-              subLabel={`(${isOT ? 39 : 27} Books)`}
-              onHoverEnter={() => setHoveredLevel('testament')} 
-              onHoverLeave={() => setHoveredLevel(null)}
+              pointerIndex={localBookIndex} pointerTooltip={`${targetTestamentLetter} ➔ ${bookMeta.name}`} isPointerActive={hoveredLevel === 'testament'}
+              label="Testament Acrostic" subLabel={`(${isOT ? 39 : 27} Books)`}
+              referenceLabel={isOT ? "Old Testament" : "New Testament"}
+              onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
             />
           </div>
         )}
@@ -81,7 +77,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
           <InteractiveAcrostic
             text={bookData.acrostic}
             hoverType="book"
-            originHighlight={{ isActive: hoveredLevel === 'testament', tooltip: `${targetLetter} ⟵ ${localBookIndex}${localBookIndex === 1 ? 'st' : localBookIndex === 2 ? 'nd' : localBookIndex === 3 ? 'rd' : 'th'} Book` }}
+            originHighlight={{ isActive: hoveredLevel === 'testament', tooltip: `${targetTestamentLetter} ⟵ ${localBookIndex}${localBookIndex === 1 ? 'st' : localBookIndex === 2 ? 'nd' : localBookIndex === 3 ? 'rd' : 'th'} Book` }}
             onHoverChange={(idx) => {
               // We could show chapter pill highlights if we matched Chapters to letters!
             }}

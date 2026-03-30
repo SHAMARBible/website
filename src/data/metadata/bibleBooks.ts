@@ -129,20 +129,19 @@ export const TARGET_SCHEDULE: Record<string, VerseTarget> = {
 };
 
 /**
- * Given a string (e.g., "JESUS GAVE US NEW LIFE ETERNALLY") and a 1-based target count (e.g., 27),
- * returns the 0-based index of that character in the raw string including spaces.
+ * Given an acrostic string and a 1-based target count, returns the actual letter character.
  */
-export const getAbsoluteCharIndex = (str: string, targetNonSpaceCount: number): number => {
+export const getAcrosticLetter = (str: string, targetLetterCount: number): string => {
   let count = 0;
   for (let i = 0; i < str.length; i++) {
-    if (str[i] !== ' ') {
+    if (/[A-Za-z]/.test(str[i])) {
       count++;
-      if (count === targetNonSpaceCount) {
-        return i;
+      if (count === targetLetterCount) {
+        return str[i].toUpperCase();
       }
     }
   }
-  return -1;
+  return '?';
 };
 
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings, X } from 'lucide-react';
+import { X, Pencil } from 'lucide-react';
 import { useAppContext } from '../../contexts/AppContext';
 import { BIBLE_BOOKS, BIBLE_BOOK_ORDER } from '../../data/metadata/bibleBooks';
 
@@ -38,14 +38,18 @@ export const SettingsModal: React.FC = () => {
     <div className="relative">
       <button 
         onClick={handleOpen} 
-        className="p-0.5 md:p-1 lg:p-1.5 text-slate-500 hover:text-orange-600 transition-colors" 
-        title="Settings & Global Target"
+        className="group flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-1.5 hover:bg-orange-50/50 rounded-xl transition-all" 
+        title="Edit Focus Target"
       >
-        <Settings size={14} className="md:w-4 md:h-4" />
+        <span className="text-xs font-bold text-slate-400 tracking-widest uppercase hidden md:block">Focus:</span>
+        <div className="flex items-center gap-2 text-base md:text-xl font-serif text-slate-800 group-hover:text-orange-600 font-bold transition-colors">
+          <span>{bookData?.name || targetBookId} {targetChapter}:{targetVerse}</span>
+          <Pencil size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
+        </div>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-64 md:w-80 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-orange-200 p-4 z-50">
+        <div className="absolute top-full right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-2 w-72 md:w-80 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-orange-200 p-4 z-100">
           <div className="flex justify-between items-center mb-4 border-b border-orange-100 pb-2">
             <h3 className="font-bold text-orange-900 text-sm md:text-base">Focus Target</h3>
             <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-rose-500 transition-colors">
