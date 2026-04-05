@@ -29,15 +29,18 @@ export const HighlightedAcrostic: React.FC<HighlightedAcrosticProps> = ({
   onHoverEnter,
   onHoverLeave
 }) => {
+  const [isHovered, setIsHovered] = React.useState(false);
   let currentLetterIdx = 0;
   return (
     <div
-      className={`relative flex flex-col items-center transition-all duration-300 cursor-default bg-white/30 px-2 py-1.5 md:px-4 md:py-2 rounded-lg sm:rounded-xl border max-w-full ${(isOriginActive || isPointerActive)
-          ? 'border-orange-300 shadow-md bg-white/70 scale-[1.03] z-10'
+      className={`relative flex flex-col items-center transition-all duration-300 cursor-default bg-white/30 px-2 py-1.5 md:px-4 md:py-2 rounded-lg sm:rounded-xl border max-w-full ${
+          isHovered ? 'border-orange-300 shadow-xl bg-white/90 scale-[1.05] z-50' :
+          (isOriginActive || isPointerActive)
+          ? 'border-orange-300 shadow-md bg-white/70 scale-[1.03] z-[100]'
           : 'border-white/50 shadow-sm opacity-70 hover:opacity-100'
         }`}
-      onMouseEnter={onHoverEnter}
-      onMouseLeave={onHoverLeave}
+      onMouseEnter={() => { setIsHovered(true); onHoverEnter(); }}
+      onMouseLeave={() => { setIsHovered(false); onHoverLeave(); }}
     >
       <div className="flex flex-col items-center mb-1 md:mb-2">
         <div className="flex items-center space-x-1 md:space-x-1.5">

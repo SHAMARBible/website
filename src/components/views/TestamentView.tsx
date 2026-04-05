@@ -16,6 +16,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
   const [hoveredBookIdx, setHoveredBookIdx] = useState<number | null>(null);
   const [data, setData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [viewMode, setViewMode] = useState<'groups' | 'list'>('groups');
 
   // Determine if active target is OT or NT
   const isOT = BIBLE_BOOK_ORDER.indexOf(targetBookId) < 39;
@@ -51,22 +52,35 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
       <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4">
         <div className="flex items-center space-x-1 sm:space-x-2 mb-1 sm:mb-2 md:mb-3">
           <Layers className="text-orange-500 w-4 h-4 sm:w-5 sm:h-5" />
-          <h3 className="text-slate-500 uppercase tracking-widest font-semibold text-[10px] sm:text-xs md:text-sm">Testament Level</h3>
+          <h3 className="text-slate-500 uppercase tracking-widest font-semibold text-[10px] sm:text-xs md:text-sm">Testament Acrostic</h3>
         </div>
 
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-2 sm:mb-3 md:mb-4 text-slate-800 text-center leading-tight">
           {testamentDisplay}
         </h2>
-        <div className="flex items-center text-orange-600 font-medium tracking-widest uppercase mb-4 sm:mb-6 md:mb-10 text-[9px] sm:text-[10px] md:text-xs border-b border-orange-200 pb-1 sm:pb-2">
-          <BookOpen size={12} className="mr-1 sm:mr-2 md:w-3.5 md:h-3.5" /> {testamentBookCount} Books
+
+        <div className="mb-2 sm:mb-4 md:mb-6 w-full max-w-4xl px-2 sm:px-4">
+          <InteractiveAcrostic text={rawAcrostic} hoverType="testament" startIdxOffset={isOT ? 0 : 39} />
         </div>
 
-        <div className="mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2 sm:px-4">
-          <InteractiveAcrostic text={rawAcrostic} hoverType="testament" />
+        <div className="flex items-center text-orange-600 font-medium tracking-widest uppercase mb-4 sm:mb-6 md:mb-10 text-[9px] sm:text-[10px] md:text-xs pb-1 sm:pb-2 gap-4">
+          <button 
+            onClick={() => setViewMode('groups')}
+            className={`flex items-center border-b-[2px] pb-1 px-2 transition-colors ${viewMode === 'groups' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
+          >
+            <Layers size={14} className="mr-1.5" /> <span className="hover:underline">{groupsToUse.length} Book Groups</span>
+          </button>
+          <button 
+            onClick={() => setViewMode('list')}
+            className={`flex items-center border-b-[2px] pb-1 px-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
+          >
+            <BookOpen size={14} className="mr-1.5" /> <span className="hover:underline">{testamentBookCount} Books Preview</span>
+          </button>
         </div>
 
-        <div className="w-full max-w-4xl flex flex-col space-y-2 sm:space-y-3 md:space-y-4 px-2 sm:px-4">
-          {groupsToUse.map((group, idx) => {
+        {viewMode === 'groups' ? (
+          <div className="w-full max-w-4xl flex flex-col space-y-2 sm:space-y-3 md:space-y-4 px-2 sm:px-4">
+            {groupsToUse.map((group, idx) => {
             const isGroupHovered = hoveredGroupIndex === idx;
             // Running offset tracks the starting letter index (1-based globally for the acronym logic)
             const runningOffset = groupsToUse.slice(0, idx).reduce((acc, curr) => acc + curr.books.length, 0);
@@ -146,10 +160,27 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
             );
           })}
         </div>
-
-        <p className="mt-4 sm:mt-6 md:mt-8 text-[8px] sm:text-[10px] md:text-xs text-slate-500 max-w-2xl text-center font-light uppercase tracking-widest px-4">
-          Hierarchical structure showing the overarching {testamentBookCount} books of the {testamentDisplay}.
-        </p>
+        ) : (
+          <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4">
+            {groupsToUse.flatMap(g => g.books).map((bookId, idx) => {
+               const bName = BIBLE_BOOKS[bookId].name;
+               const bAcrostic = data?.bookAcrostics?.[bookId] || "Loading acrostic...";
+               return (
+                 <div key={bookId} 
+                      className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${explorationMode ? 'cursor-pointer hover:scale-[1.01] hover:border-orange-300' : 'cursor-default'}`}
+                      onClick={() => {
+                        if (explorationMode) {
+                            setTargetBookId(bookId);
+                            goToStep(2);
+                        }
+                      }}>
+                   <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider mb-2">{bName}</span>
+                   <span className="text-sm sm:text-base md:text-lg font-serif text-slate-700">{bAcrostic}</span>
+                 </div>
+               );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

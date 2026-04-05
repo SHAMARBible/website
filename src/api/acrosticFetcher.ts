@@ -29,6 +29,7 @@ export interface TestamentAcrostic {
 export interface TestamentsData {
   meta: any;
   testaments: Record<string, TestamentAcrostic>;
+  bookAcrostics: Record<string, string>;
 }
 
 /**

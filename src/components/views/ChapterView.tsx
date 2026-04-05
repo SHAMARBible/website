@@ -19,6 +19,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
   const [bookData, setBookData] = useState<BookAcrostic | null>(null);
   const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [viewMode, setViewMode] = useState<'acrostic' | 'list'>('acrostic');
 
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
@@ -88,12 +89,9 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
             />
           </div>
         )}
-        <h3 className="text-slate-500 uppercase tracking-widest mb-1 sm:mb-2 font-semibold text-[10px] sm:text-xs md:text-sm">Chapter Level</h3>
+        <h3 className="text-slate-500 uppercase tracking-widest mb-1 sm:mb-2 font-semibold text-[10px] sm:text-xs md:text-sm">Chapter Acrostic</h3>
         <h2 className="text-3xl md:text-5xl font-serif mb-2 sm:mb-3 md:mb-4 text-slate-800 text-center">{bookMeta.name} {targetChapter}</h2>
-        <div className="flex items-center text-orange-600 font-medium tracking-widest uppercase mb-4 sm:mb-6 md:mb-10 text-[9px] sm:text-[10px] md:text-xs border-b border-orange-200 pb-1 sm:pb-2">
-          <BookOpen size={12} className="mr-1 sm:mr-2 md:w-3.5 md:h-3.5" /> {verseCount} Verses
-        </div>
-        <div className="w-full px-2 sm:px-4">
+        <div className="w-full px-2 sm:px-4 mb-2 sm:mb-4 md:mb-6">
           <InteractiveAcrostic
             text={chapterData.acrostic}
             hoverType="chapter"
@@ -106,10 +104,54 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
             }}
             interactiveClass={explorationMode ? "cursor-pointer" : "cursor-default"}
           />
-          <p className="mt-4 sm:mt-6 md:mt-8 text-[8px] sm:text-[10px] md:text-xs text-slate-500 max-w-2xl mx-auto text-center font-light uppercase tracking-widest px-4">
-            {chapterData.acrostic.replace(/ /g, '').length} Letters for {verseCount} Verses.
-          </p>
         </div>
+
+        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
+          <button 
+            onClick={() => setViewMode('acrostic')}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'acrostic' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
+          >
+            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> Chapter Acrostic
+          </button>
+          <button 
+            onClick={() => setViewMode('list')}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
+          >
+            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {verseCount} Verses Preview
+          </button>
+        </div>
+
+        {viewMode === 'list' && (
+          <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-12">
+            {Object.keys(chapterData.verses).map((verseKey) => {
+               const vData = chapterData.verses[verseKey];
+               if (!vData) return null;
+               return (
+                 <div key={verseKey} 
+                      className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${explorationMode ? 'cursor-pointer hover:scale-[1.01] hover:border-orange-300' : 'cursor-default'}`}
+                      onClick={() => {
+                        if (explorationMode) {
+                            setTargetVerse(verseKey);
+                            goToStep(4);
+                        }
+                      }}>
+                   <div className="flex justify-between items-end mb-2">
+                     <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider">Verse {verseKey}</span>
+                     <span className="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">{vData.subwords.length} Letters</span>
+                   </div>
+                   <div className="flex flex-wrap gap-x-3 gap-y-1">
+                     {vData.subwords.map((sub, i) => (
+                       <div key={i} className="flex space-x-1 items-baseline">
+                         <span className="text-orange-600 font-bold text-sm">{sub.letter}</span>
+                         <span className="text-[11px] text-slate-600 uppercase tracking-widest">{sub.word}</span>
+                       </div>
+                     ))}
+                   </div>
+                 </div>
+               );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

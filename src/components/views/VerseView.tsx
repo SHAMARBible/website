@@ -75,6 +75,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
   if (!verseData) return null;
 
   // Accurate verse count from metadata
+  // Accurate verse count from metadata
   const verseCount = bookMeta.verses[targetChapterNum - 1];
 
   return (
@@ -111,7 +112,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
             />
           </div>
         )}
-        <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 font-semibold text-[10px] md:text-[11px]">Verse Level</h3>
+        <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 font-semibold text-[10px] md:text-[11px]">Verse Acrostic</h3>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-2 md:mb-4 text-slate-800 text-center">{bookMeta.name} {targetChapter}:{targetVerse}</h2>
 
         {/* Subtle Acrostic Word Display */}

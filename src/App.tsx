@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronLeft, Home, Maximize, Minimize, Eye, EyeOff, Settings } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Home, Maximize, Minimize, Map, Settings } from 'lucide-react';
 import { GeometricBackground } from './components/shared/GeometricBackground';
 import { SettingsModal } from './components/shared/SettingsModal';
 import { useAppContext } from './contexts/AppContext';
@@ -104,7 +104,7 @@ export default function App() {
           <div className="flex justify-center md:justify-end items-center shrink-0 md:flex-1 order-3">
             <div className="flex items-center gap-1 sm:gap-2 md:gap-3 transition-all duration-300 bg-white/50 backdrop-blur-md px-2 py-1 md:px-3 md:py-1.5 rounded-full shadow-sm border border-slate-200/50">
               <button onClick={() => setShowAcrosticBreadcrumbs(!showAcrosticBreadcrumbs)} className={`flex items-center gap-1.5 p-1 md:px-2 md:py-1 rounded-md transition-colors ${showAcrosticBreadcrumbs ? 'text-orange-600 bg-orange-50' : 'text-slate-500 hover:text-orange-600 hover:bg-white/60'}`} title="Map">
-                {showAcrosticBreadcrumbs ? <EyeOff size={16} /> : <Eye size={16} />}
+                <Map size={16} />
                 <span className="hidden lg:inline text-xs font-semibold uppercase tracking-wider">Map</span>
               </button>
               
@@ -118,7 +118,7 @@ export default function App() {
 
         </header>
 
-        <main className="grow relative w-full overflow-hidden rounded-xl md:rounded-3xl">
+        <main className="grow relative w-full overflow-hidden rounded-xl md:rounded-3xl z-10">
           <IntroView isActive={currentStep === 0} setExplorationMode={setExplorationMode} goToStep={goToStep} />
           <TestamentView isActive={currentStep === 1} goToStep={goToStep} />
           <BookView isActive={currentStep === 2} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />

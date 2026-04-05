@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BIBLE_BOOKS, BIBLE_BOOK_ORDER } from '../../data/metadata/bibleBooks';
 
 export interface OriginHighlight {
   isActive: boolean;
@@ -55,7 +56,10 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                   const isHovered = hoveredIdx === currentGlobalIdx || externalHoverIdx === currentGlobalIdx;
 
                   let subText = "";
-                  if (hoverType === 'testament') subText = `Bk ${currentGlobalIdx}`;
+                  if (hoverType === 'testament') {
+                    const bookId = BIBLE_BOOK_ORDER[currentGlobalIdx - 1];
+                    subText = bookId ? BIBLE_BOOKS[bookId].name : `Bk ${currentGlobalIdx}`;
+                  }
                   else if (hoverType === 'book') subText = `Ch ${currentGlobalIdx}`;
                   else if (hoverType === 'chapter') subText = `Vs ${currentGlobalIdx}`;
 
@@ -118,14 +122,14 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
   }
 
   return (
-    <div className="flex justify-center w-full">
-      <div className="relative flex flex-wrap justify-center items-center w-full gap-x-1 sm:gap-x-3 gap-y-2 sm:gap-y-3 bg-white/40 px-3 pt-3 pb-6 sm:px-6 sm:pt-5 sm:pb-8 md:px-10 md:pt-6 md:pb-10 rounded-xl sm:rounded-3xl border border-white/60 shadow-sm backdrop-blur-md max-w-5xl">
-        {content}
-        <div className="absolute -bottom-2 sm:-bottom-2.5 md:-bottom-3 left-1/2 -translate-x-1/2 pointer-events-none">
-          <span className="flex items-center px-2 py-0.5 sm:px-3 sm:py-1 shadow-md rounded-full border border-orange-200 bg-orange-100 text-orange-800 text-[7px] sm:text-[9px] md:text-[11px] tracking-widest font-bold uppercase whitespace-nowrap">
+    <div className="flex justify-center w-full relative pt-2 sm:pt-3">
+      <div className="relative flex flex-wrap justify-center items-center w-full gap-x-1 sm:gap-x-3 gap-y-2 sm:gap-y-3 bg-white/40 px-3 pt-4 sm:pt-5 pb-3 sm:pb-4 md:px-10 md:pt-6 md:pb-5 rounded-xl sm:rounded-3xl border border-white/60 shadow-sm backdrop-blur-md max-w-5xl">
+        <div className="absolute -top-2 sm:-top-2.5 md:-top-3 left-1/2 -translate-x-1/2 pointer-events-none z-10 mt-0.5">
+          <span className="flex items-center px-2 py-0.5 sm:px-3 sm:py-1 shadow-sm rounded-full border border-orange-100 bg-white/90 text-orange-700 text-[7px] sm:text-[9px] md:text-[11px] tracking-widest font-bold uppercase whitespace-nowrap">
             {totalLetters} Letters
           </span>
         </div>
+        {content}
       </div>
     </div>
   );

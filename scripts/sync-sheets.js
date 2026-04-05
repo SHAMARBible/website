@@ -62,7 +62,8 @@ async function main() {
     testaments: {
       OT: { acrostic: "", bookGroupAcrosticHints: {} },
       NT: { acrostic: "", bookGroupAcrosticHints: {} }
-    }
+    },
+    bookAcrostics: {}
   };
 
   const finalBooks = {};
@@ -85,6 +86,7 @@ async function main() {
 
     const id = nameToId[nameCol];
     if (id) {
+      testaments.bookAcrostics[id] = acrosticCol;
       finalBooks[id] = {
         acrostic: acrosticCol,
         chapterPhrase: "",
