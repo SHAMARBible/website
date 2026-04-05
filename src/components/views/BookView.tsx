@@ -16,11 +16,10 @@ export interface BookViewProps {
 
 export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadcrumbs, hoveredLevel, setHoveredLevel, goToStep }) => {
   const { targetBookId, setTargetChapter, explorationMode } = useAppContext();
-  const [hoveredChapterIdx, setHoveredChapterIdx] = useState<number | null>(null);
   const [bookData, setBookData] = useState<BookAcrostic | null>(null);
   const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<'acrostic' | 'list'>('acrostic');
+  const [showList, setShowList] = useState(false);
 
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
@@ -29,9 +28,10 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
   const bookMeta = BIBLE_BOOKS[targetBookId];
 
   useEffect(() => {
-    if (!isActive && !bookData) return; // Don't fetch until we enter the view branch (or keep simple)
+    if (!isActive && !bookData) return;
     
-    setLoading(true);
+    // We do NOT unconditionally setLoading(true) here to prevent annoying loader flashes 
+    // when clicking between books quickly or reading locally cached data.
     Promise.all([
       fetchBookAcrostics(targetBookId),
       fetchTestamentsOverview()
@@ -87,22 +87,16 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
           />
         </div>
 
-        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
+        <div className="flex justify-center items-center mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
           <button 
-            onClick={() => setViewMode('acrostic')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'acrostic' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
-          >
-            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> Book Acrostic
-          </button>
-          <button 
-            onClick={() => setViewMode('list')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
+            onClick={() => setShowList(!showList)}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${showList ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600 border-transparent hover:border-orange-300 hover:text-orange-700'}`}
           >
             <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {bookMeta.verses.length} Chapters Preview
           </button>
         </div>
         
-        {viewMode === 'list' && (
+        {showList && (
           <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-12">
             {Object.keys(bookData.chapters).map((chKey, idx) => {
                const chData = bookData.chapters[chKey];

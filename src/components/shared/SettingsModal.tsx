@@ -5,7 +5,7 @@ import { BIBLE_BOOKS, BIBLE_BOOK_ORDER } from '../../data/metadata/bibleBooks';
 
 export const SettingsModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { targetBookId, setTargetBookId, targetChapter, setTargetChapter, targetVerse, setTargetVerse } = useAppContext();
+  const { targetBookId, setTargetBookId, targetChapter, setTargetChapter, targetVerse, setTargetVerse, navigationHistory } = useAppContext();
 
   // Selected State (allows user to cancel before applying)
   const [tempBook, setTempBook] = useState(targetBookId);
@@ -34,6 +34,8 @@ export const SettingsModal: React.FC = () => {
   if (parseInt(tempChapter) > maxChapters) setTempChapter("1");
   if (parseInt(tempVerse) > maxVerses) setTempVerse("1");
 
+  const activeBookData = BIBLE_BOOKS[targetBookId];
+
   return (
     <div className="relative">
       <button 
@@ -43,19 +45,21 @@ export const SettingsModal: React.FC = () => {
       >
         <span className="text-xs font-bold text-slate-400 tracking-widest uppercase hidden md:block">Focus:</span>
         <div className="flex items-center gap-2 text-base md:text-xl font-serif text-slate-800 group-hover:text-orange-600 font-bold transition-colors">
-          <span>{bookData?.name || targetBookId} {targetChapter}:{targetVerse}</span>
+          <span>{activeBookData?.name || targetBookId} {targetChapter}:{targetVerse}</span>
           <Pencil size={14} className="opacity-0 group-hover:opacity-100 transition-opacity text-orange-500" />
         </div>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-2 w-72 md:w-80 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-orange-200 p-4 z-100">
-          <div className="flex justify-between items-center mb-4 border-b border-orange-100 pb-2">
-            <h3 className="font-bold text-orange-900 text-sm md:text-base">Focus Target</h3>
-            <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-rose-500 transition-colors">
-              <X size={16} />
-            </button>
-          </div>
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)}></div>
+          <div className="absolute top-full right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-2 w-72 md:w-80 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-orange-200 p-4 z-50">
+            <div className="flex justify-between items-center mb-4 border-b border-orange-100 pb-2">
+              <h3 className="font-bold text-orange-900 text-sm md:text-base">Focus Target</h3>
+              <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-rose-500 transition-colors">
+                <X size={16} />
+              </button>
+            </div>
 
           <div className="space-y-3">
             <div>
@@ -105,14 +109,37 @@ export const SettingsModal: React.FC = () => {
                 </div>
             </div>
 
-            <button 
+              <button 
                 onClick={handleApply}
-                className="w-full mt-4 bg-linear-to-r from-orange-400 to-rose-400 hover:from-orange-500 hover:to-rose-500 text-white font-bold py-2 rounded-xl transition-all shadow-md active:scale-95"
-            >
-                Apply Target
-            </button>
+                className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2 rounded-lg transition-colors border border-slate-300"
+              >
+                Cancel
+              </button>
+            </div>
+
+            {navigationHistory.length > 1 && (
+              <div className="mt-4 pt-4 border-t border-slate-100">
+                <label className="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Recent</label>
+                <div className="flex flex-col gap-1.5">
+                  {navigationHistory.slice(1).map((loc, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setTargetBookId(loc.bookId);
+                        setTargetChapter(loc.chapter);
+                        setTargetVerse(loc.verse);
+                        setIsOpen(false);
+                      }}
+                      className="text-left text-sm font-medium text-slate-600 hover:text-orange-600 hover:bg-orange-50 px-2 py-1.5 rounded transition-colors flex items-center justify-between"
+                    >
+                      <span>{BIBLE_BOOKS[loc.bookId]?.name} {loc.chapter}:{loc.verse}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </div>
+        </>
       )}
     </div>
   );

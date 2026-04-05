@@ -19,7 +19,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
   const [bookData, setBookData] = useState<BookAcrostic | null>(null);
   const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [viewMode, setViewMode] = useState<'acrostic' | 'list'>('acrostic');
+  const [showList, setShowList] = useState(false);
 
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
@@ -30,7 +30,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
   useEffect(() => {
     if (!isActive && !bookData) return;
     
-    setLoading(true);
+    // Prevent loading flash if cached
     Promise.all([
       fetchBookAcrostics(targetBookId),
       fetchTestamentsOverview()
@@ -106,24 +106,18 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
           />
         </div>
 
-        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
+        <div className="flex justify-center items-center mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
           <button 
-            onClick={() => setViewMode('acrostic')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'acrostic' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
-          >
-            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> Chapter Acrostic
-          </button>
-          <button 
-            onClick={() => setViewMode('list')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
+            onClick={() => setShowList(!showList)}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${showList ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600 border-transparent hover:border-orange-300 hover:text-orange-700'}`}
           >
             <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {verseCount} Verses Preview
           </button>
         </div>
 
-        {viewMode === 'list' && (
+        {showList && (
           <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-12">
-            {Object.keys(chapterData.verses).map((verseKey) => {
+            {Array.from({ length: verseCount }, (_, i) => (i + 1).toString()).map((verseKey) => {
                const vData = chapterData.verses[verseKey];
                if (!vData) return null;
                return (
@@ -135,15 +129,21 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                             goToStep(4);
                         }
                       }}>
-                   <div className="flex justify-between items-end mb-2">
-                     <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider">Verse {verseKey}</span>
-                     <span className="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">{vData.subwords.length} Letters</span>
+                   <div className="flex flex-col mb-3 pb-2 border-b border-orange-200/50">
+                     <div className="flex justify-between items-end mb-1">
+                       <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider">Verse {verseKey}</span>
+                       <span className="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">{vData.subwords.length} Letters</span>
+                     </div>
+                     <span className="text-base sm:text-lg font-serif text-slate-800 tracking-wider uppercase">
+                       <span className="text-orange-600 font-bold">{vData.acrostic.charAt(0)}</span>
+                       {vData.acrostic.slice(1)}
+                     </span>
                    </div>
                    <div className="flex flex-wrap gap-x-3 gap-y-1">
                      {vData.subwords.map((sub, i) => (
-                       <div key={i} className="flex space-x-1 items-baseline">
-                         <span className="text-orange-600 font-bold text-sm">{sub.letter}</span>
-                         <span className="text-[11px] text-slate-600 uppercase tracking-widest">{sub.word}</span>
+                       <div key={i} className="flex items-baseline">
+                         <span className="text-orange-600 font-bold text-sm tracking-tight">{sub.word.charAt(0).toUpperCase()}</span>
+                         <span className="text-[11px] text-slate-600 uppercase tracking-widest ml-[1px]">{sub.word.slice(1)}</span>
                        </div>
                      ))}
                    </div>

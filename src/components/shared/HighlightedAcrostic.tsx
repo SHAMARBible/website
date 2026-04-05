@@ -34,10 +34,10 @@ export const HighlightedAcrostic: React.FC<HighlightedAcrosticProps> = ({
   return (
     <div
       className={`relative flex flex-col items-center transition-all duration-300 cursor-default bg-white/30 px-2 py-1.5 md:px-4 md:py-2 rounded-lg sm:rounded-xl border max-w-full ${
-          isHovered ? 'border-orange-300 shadow-xl bg-white/90 scale-[1.05] z-50' :
+          isHovered ? 'border-orange-300 shadow-xl bg-white/90 scale-[1.05] z-[100]' :
           (isOriginActive || isPointerActive)
-          ? 'border-orange-300 shadow-md bg-white/70 scale-[1.03] z-[100]'
-          : 'border-white/50 shadow-sm opacity-70 hover:opacity-100'
+          ? 'border-orange-300 shadow-md bg-white/70 scale-[1.03] z-[90]'
+          : 'border-white/50 shadow-sm opacity-70 hover:opacity-100 z-10'
         }`}
       onMouseEnter={() => { setIsHovered(true); onHoverEnter(); }}
       onMouseLeave={() => { setIsHovered(false); onHoverLeave(); }}

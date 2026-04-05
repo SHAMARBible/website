@@ -7,6 +7,7 @@ import { BIBLE_BOOKS } from './data/metadata/bibleBooks';
 
 // View Components
 import { IntroView } from './components/views/IntroView';
+import { BibleExplorerView } from './components/views/BibleExplorerView';
 import { TestamentView } from './components/views/TestamentView';
 import { BookView } from './components/views/BookView';
 import { ChapterView } from './components/views/ChapterView';
@@ -71,26 +72,32 @@ export default function App() {
                 onClick={() => goToStep(1)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 1 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
-              <span className="hidden sm:inline">Testament</span>
-              <span className="sm:hidden">Test.</span>
+              Bible
             </button>
             <button 
                 onClick={() => goToStep(2)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 2 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
-              Book
+              <span className="hidden sm:inline">Testament</span>
+              <span className="sm:hidden">Test.</span>
             </button>
             <button 
                 onClick={() => goToStep(3)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 3 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
-              <span className="hidden sm:inline">Chapter</span>
-              <span className="sm:hidden">Chap.</span>
+              Book
             </button>
             <button 
                 onClick={() => goToStep(4)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 4 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
+              <span className="hidden sm:inline">Chapter</span>
+              <span className="sm:hidden">Chap.</span>
+            </button>
+            <button 
+                onClick={() => goToStep(5)} 
+                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+                ${currentStep === 5 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Verse
             </button>
           </div>
@@ -120,10 +127,11 @@ export default function App() {
 
         <main className="grow relative w-full overflow-hidden rounded-xl md:rounded-3xl z-10">
           <IntroView isActive={currentStep === 0} setExplorationMode={setExplorationMode} goToStep={goToStep} />
-          <TestamentView isActive={currentStep === 1} goToStep={goToStep} />
-          <BookView isActive={currentStep === 2} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
-          <ChapterView isActive={currentStep === 3} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
-          <VerseView isActive={currentStep === 4} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} />
+          <BibleExplorerView isActive={currentStep === 1} goToStep={goToStep} />
+          <TestamentView isActive={currentStep === 2} goToStep={goToStep} />
+          <BookView isActive={currentStep === 3} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
+          <ChapterView isActive={currentStep === 4} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
+          <VerseView isActive={currentStep === 5} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} />
         </main>
 
 
