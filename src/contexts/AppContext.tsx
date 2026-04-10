@@ -21,7 +21,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [targetBookId, setTargetBookId] = useState('REV');
   const [targetChapter, setTargetChapter] = useState('2');
   const [targetVerse, setTargetVerse] = useState('10');
-  const [explorationMode, setExplorationMode] = useState(false);
+  const [explorationMode, setExplorationMode] = useState(true);
   const [autoOpenListFocus, setAutoOpenListFocus] = useState(false);
   const [navigationHistory, setNavigationHistory] = useState<Array<{bookId: string, chapter: string, verse: string}>>(() => {
     try {

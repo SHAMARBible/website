@@ -81,12 +81,12 @@ export default function App() {
               <span className="hidden sm:inline">Introduction</span>
               <span className="sm:hidden">Intro</span>
             </button>
-            {/* <button 
+            <button 
                 onClick={() => handleTopMenuClick(1)} 
-                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+                className={`hidden hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 1 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Bible
-            </button> */}
+            </button>
             <button
               onClick={() => handleTopMenuClick(2)}
               className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
