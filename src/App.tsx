@@ -71,45 +71,45 @@ export default function App() {
       <div className="relative z-10 flex flex-col h-dvh w-full max-w-dvw p-2 sm:p-4 md:p-12">
 
         <header className="relative z-50 shrink-0 transition-all duration-700 ease-in-out flex flex-col md:flex-row justify-between items-center w-full gap-2 md:gap-4 mb-1 sm:mb-2">
-          
+
           {/* Left: View Switcher Container */}
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-1 sm:gap-2 text-[10px] sm:text-xs md:text-sm font-medium tracking-wide flex-1 order-2 md:order-1">
-            <button 
-                onClick={() => handleTopMenuClick(0)} 
-                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+            <button
+              onClick={() => handleTopMenuClick(0)}
+              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 0 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Introduction</span>
               <span className="sm:hidden">Intro</span>
             </button>
-            <button 
+            {/* <button 
                 onClick={() => handleTopMenuClick(1)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 1 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Bible
-            </button>
-            <button 
-                onClick={() => handleTopMenuClick(2)} 
-                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+            </button> */}
+            <button
+              onClick={() => handleTopMenuClick(2)}
+              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 2 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Testament</span>
               <span className="sm:hidden">Test.</span>
             </button>
-            <button 
-                onClick={() => handleTopMenuClick(3)} 
-                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+            <button
+              onClick={() => handleTopMenuClick(3)}
+              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 3 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Book
             </button>
-            <button 
-                onClick={() => handleTopMenuClick(4)} 
-                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+            <button
+              onClick={() => handleTopMenuClick(4)}
+              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 4 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Chapter</span>
               <span className="sm:hidden">Chap.</span>
             </button>
-            <button 
-                onClick={() => handleTopMenuClick(5)} 
-                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+            <button
+              onClick={() => handleTopMenuClick(5)}
+              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 5 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Verse
             </button>
@@ -127,7 +127,7 @@ export default function App() {
                 <Map size={16} />
                 <span className="hidden lg:inline text-xs font-semibold uppercase tracking-wider">Map</span>
               </button>
-              
+
               <div className="w-px h-4 md:h-5 bg-slate-300/80"></div>
 
               <button onClick={toggleFullScreen} className="flex items-center p-1 md:p-1.5 rounded-md text-slate-500 hover:text-orange-600 hover:bg-white/60 transition-colors" title="Full Screen">
