@@ -203,15 +203,22 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                             setTappedListId(null);
                         }
                       }}>
-                   <div className="flex justify-between items-end mb-2">
+                   <div className="flex justify-between items-end mb-3">
                      <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider">Verse {verseKey}</span>
                      <span className="text-[10px] text-slate-500 font-semibold tracking-widest uppercase">{vData.subwords.length} Letters</span>
                    </div>
-                   <div className="flex flex-wrap gap-x-3 gap-y-1">
+
+                   <div className="mb-4">
+                     <span className="text-xl md:text-2xl font-serif text-slate-800 font-bold tracking-widest border-l-4 border-orange-500 pl-4 py-1 block bg-orange-50/30 rounded-r-lg">
+                       <span className="text-orange-600 underline underline-offset-4 decoration-2">{(vData.acrostic || "").charAt(0)}</span>
+                       {(vData.acrostic || "").slice(1)}
+                     </span>
+                   </div>
+                   <div className="flex flex-wrap gap-x-4 gap-y-2">
                      {vData.subwords.map((sub, i) => (
-                       <div key={i} className="flex space-x-1 items-baseline">
-                         <span className="text-orange-600 font-bold text-sm">{sub.letter}</span>
-                         <span className="text-[11px] text-slate-600 uppercase tracking-widest">{sub.word}</span>
+                       <div key={i} className="flex items-baseline group/sub">
+                         <span className="text-orange-600 font-bold text-[13px] md:text-sm tracking-tight group-hover/sub:scale-110 transition-transform inline-block">{sub.word.charAt(0).toUpperCase()}</span>
+                         <span className="text-[10px] md:text-[11px] text-slate-600 uppercase tracking-widest ml-[1px] opacity-90">{sub.word.slice(1)}</span>
                        </div>
                      ))}
                    </div>
