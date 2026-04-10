@@ -34,6 +34,15 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
   interactiveClass = ""
 }) => {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const [tappedIdx, setTappedIdx] = useState<number | null>(null);
+
+  // Clear tapped state if user scrolls or taps elsewhere (optional but good practice)
+  React.useEffect(() => {
+    if (tappedIdx === null) return;
+    const timer = setTimeout(() => setTappedIdx(null), 3000); // clear after 3s
+    return () => clearTimeout(timer);
+  }, [tappedIdx]);
+
   const sections = text.split(',');
   const totalLetters = text.replace(/[^A-Za-z]/g, '').length;
   let globalLetterIdx = 0;
@@ -53,7 +62,7 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                   const currentGlobalIdx = globalLetterIdx + startIdxOffset;
                   const isFirstLetter = isLetter && globalLetterIdx === 1;
                   const showOrigin = isFirstLetter && originHighlight?.isActive;
-                  const isHovered = hoveredIdx === currentGlobalIdx || externalHoverIdx === currentGlobalIdx;
+                  const isHovered = hoveredIdx === currentGlobalIdx || externalHoverIdx === currentGlobalIdx || tappedIdx === currentGlobalIdx;
 
                   let subText = "";
                   if (hoverType === 'testament') {
@@ -81,7 +90,13 @@ export const InteractiveAcrostic: React.FC<InteractiveAcrosticProps> = ({
                       }}
                       onClick={() => {
                         if (isLetter && onAcrosticClick) {
+                            const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+                            if (isTouchPrimary && tappedIdx !== currentGlobalIdx) {
+                                setTappedIdx(currentGlobalIdx);
+                                return;
+                            }
                             onAcrosticClick(currentGlobalIdx);
+                            setTappedIdx(null);
                         }
                       }}
                     >

@@ -21,6 +21,13 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'acrostic' | 'list'>('acrostic');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [tappedListId, setTappedListId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (tappedListId === null) return;
+    const timer = setTimeout(() => setTappedListId(null), 3000);
+    return () => clearTimeout(timer);
+  }, [tappedListId]);
 
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
@@ -116,7 +123,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                     {prevChapter ? (
                     <button 
                         onClick={() => traverseChapter(prevChapter)} 
-                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors cursor-pointer"
                     >
                         <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
                     </button>
@@ -128,7 +135,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                     <h2 className="text-3xl md:text-5xl font-serif text-slate-800 text-center">{bookMeta.name} {targetChapter}</h2>
                     <button 
                       onClick={() => { setAutoOpenListFocus(true); goToStep(3); }}
-                      className="text-[10px] md:text-[11px] text-orange-400 hover:text-orange-600 uppercase tracking-widest font-semibold mt-1 hover:underline underline-offset-4 transition-colors text-center"
+                      className="text-[10px] md:text-[11px] text-orange-400 hover:text-orange-600 uppercase tracking-widest font-semibold mt-1 hover:underline underline-offset-4 transition-colors text-center cursor-pointer"
                     >
                       View Chapter List
                     </button>
@@ -138,7 +145,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                     {nextChapter ? (
                     <button 
                         onClick={() => traverseChapter(nextChapter)} 
-                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors cursor-pointer"
                     >
                         <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                     </button>
@@ -166,7 +173,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
         <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2 pb-1 sm:pb-2">
           <button 
             onClick={() => setViewMode(viewMode === 'list' ? 'acrostic' : 'list')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors cursor-pointer ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
           >
             <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {verseCount} Verses Preview
           </button>
@@ -177,13 +184,21 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
             {Object.keys(chapterData.verses).map((verseKey) => {
                const vData = chapterData.verses[verseKey];
                if (!vData) return null;
+               
+               const isTapped = tappedListId === verseKey;
                return (
                  <div key={verseKey} id={`verse-item-${verseKey}`}
-                      className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${explorationMode ? 'cursor-pointer hover:scale-[1.01] hover:border-orange-300' : 'cursor-default'}`}
+                      className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl transition-all duration-300 ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isTapped ? 'scale-[1.01] border-orange-300 shadow-md' : 'shadow-sm hover:shadow-md hover:scale-[1.01] hover:border-orange-300'}`}
                       onClick={() => {
                         if (explorationMode) {
+                            const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+                            if (isTouchPrimary && !isTapped) {
+                                setTappedListId(verseKey);
+                                return;
+                            }
                             setTargetVerse(verseKey);
                             goToStep(5);
+                            setTappedListId(null);
                         }
                       }}>
                    <div className="flex justify-between items-end mb-2">

@@ -17,6 +17,13 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
   const [data, setData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [viewMode, setViewMode] = useState<'groups' | 'list'>('groups');
+  const [tappedListId, setTappedListId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (tappedListId === null) return;
+    const timer = setTimeout(() => setTappedListId(null), 3000);
+    return () => clearTimeout(timer);
+  }, [tappedListId]);
 
   // Determine if active target is OT or NT
   const isOT = BIBLE_BOOK_ORDER.indexOf(targetBookId) < 39;

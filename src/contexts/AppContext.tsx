@@ -17,21 +17,32 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const getInitialState = () => {
+    try {
+        const saved = localStorage.getItem('shamarNavHistory');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed && parsed.length > 0) {
+                return { history: parsed, active: parsed[0] };
+            }
+        }
+    } catch (e) {
+        console.error('Failed to parse nav history', e);
+    }
+    return { 
+        history: [], 
+        active: { bookId: 'JHN', chapter: '3', verse: '16' }
+    };
+};
+
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [targetBookId, setTargetBookId] = useState('REV');
-  const [targetChapter, setTargetChapter] = useState('2');
-  const [targetVerse, setTargetVerse] = useState('10');
+  const init = getInitialState();
+  const [targetBookId, setTargetBookId] = useState(init.active.bookId);
+  const [targetChapter, setTargetChapter] = useState(init.active.chapter);
+  const [targetVerse, setTargetVerse] = useState(init.active.verse);
   const [explorationMode, setExplorationMode] = useState(true);
   const [autoOpenListFocus, setAutoOpenListFocus] = useState(false);
-  const [navigationHistory, setNavigationHistory] = useState<Array<{bookId: string, chapter: string, verse: string}>>(() => {
-    try {
-      const saved = localStorage.getItem('shamarNavHistory');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {
-      console.error('Failed to parse nav history', e);
-    }
-    return [];
-  });
+  const [navigationHistory, setNavigationHistory] = useState<Array<{bookId: string, chapter: string, verse: string}>>(init.history);
 
   // Track History
   useEffect(() => {
@@ -45,17 +56,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       return newHistory;
     });
   }, [targetBookId, targetChapter, targetVerse]);
-
-  // Verse of the Day (VotD) loader. Checks timestamp and switches active presentation target natively.
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const target = TARGET_SCHEDULE[today] || TARGET_SCHEDULE['default'];
-    if (target) {
-      setTargetBookId(target.bookId);
-      setTargetChapter(target.chapter);
-      setTargetVerse(target.verse);
-    }
-  }, []);
 
   return (
     <AppContext.Provider value={{
