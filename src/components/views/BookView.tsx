@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen, Loader2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { BookOpen, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { HighlightedAcrostic } from '../shared/HighlightedAcrostic';
 import { InteractiveAcrostic } from '../shared/InteractiveAcrostic';
 import { useAppContext } from '../../contexts/AppContext';
@@ -15,11 +15,12 @@ export interface BookViewProps {
 }
 
 export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadcrumbs, hoveredLevel, setHoveredLevel, goToStep }) => {
-  const { targetBookId, setTargetChapter, explorationMode } = useAppContext();
+  const { targetBookId, setTargetBookId, setTargetChapter, explorationMode, autoOpenListFocus, setAutoOpenListFocus } = useAppContext();
   const [bookData, setBookData] = useState<BookAcrostic | null>(null);
   const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [showList, setShowList] = useState(false);
+  const [viewMode, setViewMode] = useState<'acrostic' | 'list'>('acrostic');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
@@ -28,10 +29,9 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
   const bookMeta = BIBLE_BOOKS[targetBookId];
 
   useEffect(() => {
-    if (!isActive && !bookData) return;
+    if (!isActive && !bookData) return; // Don't fetch until we enter the view branch (or keep simple)
     
-    // We do NOT unconditionally setLoading(true) here to prevent annoying loader flashes 
-    // when clicking between books quickly or reading locally cached data.
+    setLoading(true);
     Promise.all([
       fetchBookAcrostics(targetBookId),
       fetchTestamentsOverview()
@@ -45,6 +45,24 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
     });
   }, [targetBookId, isActive]);
 
+  useEffect(() => {
+    if (isActive && autoOpenListFocus) {
+      setViewMode('list');
+      setAutoOpenListFocus(false);
+      setTimeout(() => {
+        const el = document.getElementById(`chapter-item-1`);
+        if (el && scrollContainerRef.current) {
+           el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+  }, [isActive, autoOpenListFocus, setAutoOpenListFocus]);
+
+  const traverseBook = (bId: string) => {
+    setTargetBookId(bId);
+    setTargetChapter('1');
+  };
+
   if (loading || !bookData || !testamentData) {
     return (
       <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-1000 ${isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
@@ -56,22 +74,68 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
   const testamentAcrosticString = isOT ? testamentData.testaments.OT.acrostic : testamentData.testaments.NT.acrostic;
   const targetTestamentLetter = getAcrosticLetter(testamentAcrosticString, localBookIndex);
 
+  const prevBookId = globalIndex > 0 ? BIBLE_BOOK_ORDER[globalIndex - 1] : null;
+  const nextBookId = globalIndex < BIBLE_BOOK_ORDER.length - 1 ? BIBLE_BOOK_ORDER[globalIndex + 1] : null;
+
   return (
-    <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-      <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4">
-        {showAcrosticBreadcrumbs && (
-          <div className="flex flex-wrap justify-center items-center gap-2 mb-2 sm:mb-4 md:mb-6 animate-fade-in-up w-full px-2 mt-4 md:mt-0">
-            <HighlightedAcrostic
-              text={testamentAcrosticString}
-              pointerIndex={localBookIndex} pointerTooltip={`${targetTestamentLetter} ➔ ${bookMeta.name}`} isPointerActive={hoveredLevel === 'testament'}
-              label="Testament Acrostic" subLabel={`(${isOT ? 39 : 27} Books)`}
-              referenceLabel={isOT ? "Old Testament" : "New Testament"}
-              onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
-            />
+    <div ref={scrollContainerRef} className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+      <div className="w-full flex flex-col items-center pb-24">
+        
+        {/* Header Section */}
+        <div className="w-full flex flex-col items-center py-4 px-2 sm:px-4">
+          {/* Breadcrumbs and Top Actions */}
+          <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-between items-center mb-4 md:mb-6 mt-4 md:mt-0 gap-4">
+            <button 
+              onClick={() => { setAutoOpenListFocus(true); goToStep(2); }} 
+              className="text-[10px] sm:text-xs text-orange-600 font-semibold uppercase tracking-widest hover:underline bg-orange-100/50 px-3 py-1.5 rounded-full border border-orange-200/50 flex items-center transition-all hover:bg-orange-100 shadow-sm whitespace-nowrap"
+            >
+              <ChevronLeft className="w-3 h-3 mr-1" /> View Book List
+            </button>
+            {showAcrosticBreadcrumbs && (
+              <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 animate-fade-in-up">
+                <HighlightedAcrostic
+                  text={testamentAcrosticString}
+                  pointerIndex={localBookIndex} pointerTooltip={`${targetTestamentLetter} ➔ ${bookMeta.name}`} isPointerActive={hoveredLevel === 'testament'}
+                  label="Testament" subLabel={`(${isOT ? 39 : 27} Books)`}
+                  referenceLabel={isOT ? "Old Testament" : "New Testament"}
+                  onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
+                />
+              </div>
+            )}
+            <div className="hidden sm:block w-30"></div>
           </div>
-        )}
-        <h3 className="text-slate-500 uppercase tracking-widest mb-1 sm:mb-2 font-semibold text-[10px] sm:text-xs md:text-sm">Book Acrostic</h3>
-        <h2 className="text-3xl md:text-5xl font-serif mb-2 sm:mb-3 md:mb-4 text-slate-800 text-center">{bookMeta.name}</h2>
+
+          <div className="flex flex-col items-center justify-center w-full relative mb-2 md:mb-4">
+            <div className="flex items-center justify-center w-full max-w-xl relative">
+                <div className="absolute left-0">
+                    {prevBookId ? (
+                    <button 
+                        onClick={() => traverseBook(prevBookId)} 
+                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                    >
+                        <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+                    </button>
+                    ) : null}
+                </div>
+                
+                <div className="flex flex-col items-center mx-auto px-10">
+                    <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 font-semibold text-[10px] md:text-[11px]">Book Acrostic</h3>
+                    <h2 className="text-3xl md:text-5xl font-serif text-slate-800 text-center">{bookMeta.name}</h2>
+                </div>
+
+                <div className="absolute right-0">
+                    {nextBookId ? (
+                    <button 
+                        onClick={() => traverseBook(nextBookId)} 
+                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                    >
+                        <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+                    </button>
+                    ) : null}
+                </div>
+            </div>
+          </div>
+        </div>
         <div className="w-full px-2 sm:px-4 mb-2 sm:mb-4 md:mb-6">
           <InteractiveAcrostic
             text={bookData.acrostic}
@@ -80,23 +144,29 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
             onAcrosticClick={(idx) => {
                 if (explorationMode && idx !== null) {
                     setTargetChapter(idx.toString());
-                    goToStep(3);
+                    goToStep(4);
                 }
             }}
             interactiveClass={explorationMode ? "cursor-pointer" : "cursor-default"}
           />
         </div>
 
-        <div className="flex justify-center items-center mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
+        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
           <button 
-            onClick={() => setShowList(!showList)}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${showList ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600 border-transparent hover:border-orange-300 hover:text-orange-700'}`}
+            onClick={() => setViewMode('acrostic')}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'acrostic' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
+          >
+            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> Book Acrostic
+          </button>
+          <button 
+            onClick={() => setViewMode('list')}
+            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
           >
             <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {bookMeta.verses.length} Chapters Preview
           </button>
         </div>
         
-        {showList && (
+        {viewMode === 'list' && (
           <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-12">
             {Object.keys(bookData.chapters).map((chKey, idx) => {
                const chData = bookData.chapters[chKey];
@@ -107,7 +177,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
                       onClick={() => {
                         if (explorationMode) {
                             setTargetChapter(chKey);
-                            goToStep(3);
+                            goToStep(4);
                         }
                       }}>
                    <div className="flex justify-between items-end mb-2">

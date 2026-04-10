@@ -53,12 +53,12 @@ export default function App() {
   const goToStep = (index: number) => setCurrentStep(index);
 
   return (
-    <div className="min-h-screen relative overflow-hidden font-sans text-slate-800 selection:bg-orange-200 bg-linear-to-b from-amber-50 via-orange-100 to-rose-200">
+    <div className="min-h-dvh relative overflow-hidden font-sans text-slate-800 selection:bg-orange-200 bg-linear-to-b from-amber-50 via-orange-100 to-rose-200">
       <GeometricBackground />
 
       <div className="relative z-10 flex flex-col h-dvh w-full max-w-dvw p-2 sm:p-4 md:p-12">
 
-        <header className="relative z-50 shrink-0 transition-all duration-700 ease-in-out flex flex-col md:flex-row justify-between items-center w-full gap-2 md:gap-4 mb-2 sm:mb-4 md:mb-6 lg:mb-8">
+        <header className="relative z-50 shrink-0 transition-all duration-700 ease-in-out flex flex-col md:flex-row justify-between items-center w-full gap-2 md:gap-4 mb-1 sm:mb-2">
           
           {/* Left: View Switcher Container */}
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-1 sm:gap-2 text-[10px] sm:text-xs md:text-sm font-medium tracking-wide flex-1 order-2 md:order-1">
@@ -131,7 +131,7 @@ export default function App() {
           <TestamentView isActive={currentStep === 2} goToStep={goToStep} />
           <BookView isActive={currentStep === 3} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
           <ChapterView isActive={currentStep === 4} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
-          <VerseView isActive={currentStep === 5} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} />
+          <VerseView isActive={currentStep === 5} showAcrosticBreadcrumbs={showAcrosticBreadcrumbs} hoveredLevel={hoveredLevel} setHoveredLevel={setHoveredLevel} goToStep={goToStep} />
         </main>
 
 

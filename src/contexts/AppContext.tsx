@@ -10,6 +10,8 @@ interface AppContextType {
   setTargetVerse: (vs: string) => void;
   explorationMode: boolean;
   setExplorationMode: (mode: boolean) => void;
+  autoOpenListFocus: boolean;
+  setAutoOpenListFocus: (mode: boolean) => void;
   navigationHistory: Array<{bookId: string, chapter: string, verse: string}>;
 }
 
@@ -20,7 +22,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [targetChapter, setTargetChapter] = useState('2');
   const [targetVerse, setTargetVerse] = useState('10');
   const [explorationMode, setExplorationMode] = useState(false);
-  const [navigationHistory, setNavigationHistory] = useState<Array<{bookId: string, chapter: string, verse: string}>>([]);
+  const [autoOpenListFocus, setAutoOpenListFocus] = useState(false);
+  const [navigationHistory, setNavigationHistory] = useState<Array<{bookId: string, chapter: string, verse: string}>>(() => {
+    try {
+      const saved = localStorage.getItem('shamarNavHistory');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to parse nav history', e);
+    }
+    return [];
+  });
 
   // Track History
   useEffect(() => {
@@ -29,7 +40,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       if (prev[0]?.bookId === current.bookId && prev[0]?.chapter === current.chapter && prev[0]?.verse === current.verse) {
         return prev;
       }
-      return [current, ...prev].slice(0, 5); // keep last 5
+      const newHistory = [current, ...prev].slice(0, 100); // keep last 100
+      localStorage.setItem('shamarNavHistory', JSON.stringify(newHistory));
+      return newHistory;
     });
   }, [targetBookId, targetChapter, targetVerse]);
 
@@ -50,6 +63,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       targetChapter, setTargetChapter,
       targetVerse, setTargetVerse,
       explorationMode, setExplorationMode,
+      autoOpenListFocus, setAutoOpenListFocus,
       navigationHistory
     }}>
       {children}

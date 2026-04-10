@@ -49,7 +49,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
 
   return (
     <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-      <div className="my-auto w-full flex flex-col items-center py-2 sm:py-3 md:py-4">
+      <div className="w-full flex flex-col items-center pb-24 py-4 px-2 sm:px-4">
         <div className="flex items-center space-x-1 sm:space-x-2 mb-1 sm:mb-2 md:mb-3">
           <Layers className="text-orange-500 w-4 h-4 sm:w-5 sm:h-5" />
           <h3 className="text-slate-500 uppercase tracking-widest font-semibold text-[10px] sm:text-xs md:text-sm">Testament Acrostic</h3>
@@ -145,7 +145,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                             onClick={() => {
                                 if (explorationMode) {
                                     setTargetBookId(bId);
-                                    goToStep(2); // Jump to Book View
+                                    goToStep(3); // Jump to Book View
                                 }
                             }}
                           >
@@ -171,7 +171,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                       onClick={() => {
                         if (explorationMode) {
                             setTargetBookId(bookId);
-                            goToStep(2);
+                            goToStep(3);
                         }
                       }}>
                    <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider mb-2">{bName}</span>
