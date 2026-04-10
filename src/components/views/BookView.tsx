@@ -85,13 +85,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
         {/* Header Section */}
         <div className="w-full flex flex-col items-center py-4 px-2 sm:px-4">
           {/* Breadcrumbs and Top Actions */}
-          <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-between items-center mb-4 md:mb-6 mt-4 md:mt-0 gap-4">
-            <button 
-              onClick={() => { setAutoOpenListFocus(true); goToStep(2); }} 
-              className="text-[10px] sm:text-xs text-orange-600 font-semibold uppercase tracking-widest hover:underline bg-orange-100/50 px-3 py-1.5 rounded-full border border-orange-200/50 flex items-center transition-all hover:bg-orange-100 shadow-sm whitespace-nowrap"
-            >
-              <ChevronLeft className="w-3 h-3 mr-1" /> View Book List
-            </button>
+          <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-center items-center mb-4 md:mb-6 mt-4 md:mt-0 gap-4 relative">
             {showAcrosticBreadcrumbs && (
               <div className="flex flex-wrap justify-center items-center gap-1 sm:gap-2 md:gap-3 animate-fade-in-up">
                 <HighlightedAcrostic
@@ -103,7 +97,6 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
                 />
               </div>
             )}
-            <div className="hidden sm:block w-30"></div>
           </div>
 
           <div className="flex flex-col items-center justify-center w-full relative mb-2 md:mb-4">
@@ -122,6 +115,12 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
                 <div className="flex flex-col items-center mx-auto px-10">
                     <h3 className="text-slate-500 uppercase tracking-widest mb-0.5 font-semibold text-[10px] md:text-[11px]">Book Acrostic</h3>
                     <h2 className="text-3xl md:text-5xl font-serif text-slate-800 text-center">{bookMeta.name}</h2>
+                    <button 
+                      onClick={() => { setAutoOpenListFocus(true); goToStep(2); }}
+                      className="text-[10px] md:text-[11px] text-orange-400 hover:text-orange-600 uppercase tracking-widest font-semibold mt-1 hover:underline underline-offset-4 transition-colors text-center"
+                    >
+                      View Book List
+                    </button>
                 </div>
 
                 <div className="absolute right-0">

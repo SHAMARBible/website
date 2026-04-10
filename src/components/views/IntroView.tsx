@@ -40,7 +40,7 @@ export const IntroView: React.FC<IntroViewProps> = ({ isActive, setExplorationMo
 
         <div className="relative flex flex-col items-center justify-center mb-4 sm:mb-5 md:mb-10 lg:mb-12 opacity-0 animate-fade-in-up delay-1400">
           <div 
-             className="px-2 py-0.5 md:px-6 md:py-2 bg-white/40 backdrop-blur-sm border border-slate-200/50 rounded-full text-[7px] md:text-sm font-bold text-slate-500 uppercase tracking-widest shadow-sm z-10 cursor-pointer"
+             className="px-2 py-0.5 md:px-6 md:py-2 bg-white/40 backdrop-blur-sm border border-slate-200/50 rounded-full text-[7px] md:text-sm font-bold text-slate-500 uppercase tracking-widest shadow-sm z-10 cursor-default"
              onMouseEnter={() => setIsBibleHovered(true)}
              onMouseLeave={() => setIsBibleHovered(false)}
              onClick={() => setIsBibleHovered(!isBibleHovered)}

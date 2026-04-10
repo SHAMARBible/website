@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Layers, BookOpen, Loader2 } from 'lucide-react';
+import { Layers, BookOpen, Loader2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { InteractiveAcrostic } from '../shared/InteractiveAcrostic';
 import { useAppContext } from '../../contexts/AppContext';
 import { BIBLE_BOOKS, BIBLE_BOOK_ORDER, NT_GROUPS, OT_GROUPS } from '../../data/metadata/bibleBooks';
@@ -23,6 +23,18 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
   const groupsToUse = isOT ? OT_GROUPS : NT_GROUPS;
   const testamentDisplay = isOT ? "Old Testament" : "New Testament";
   const testamentBookCount = isOT ? 39 : 27;
+
+  const traverseTestament = (isNext: boolean) => {
+    if (isNext && isOT) {
+      setTargetBookId('MAT');
+      setTargetChapter('1');
+      setTargetVerse('1');
+    } else if (!isNext && !isOT) {
+      setTargetBookId('GEN');
+      setTargetChapter('1');
+      setTargetVerse('1');
+    }
+  };
 
   useEffect(() => {
     fetchTestamentsOverview()
@@ -50,14 +62,42 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
   return (
     <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
       <div className="w-full flex flex-col items-center pb-24 py-4 px-2 sm:px-4">
-        <div className="flex items-center space-x-1 sm:space-x-2 mb-1 sm:mb-2 md:mb-3">
-          <Layers className="text-orange-500 w-4 h-4 sm:w-5 sm:h-5" />
-          <h3 className="text-slate-500 uppercase tracking-widest font-semibold text-[10px] sm:text-xs md:text-sm">Testament Acrostic</h3>
-        </div>
+        
+        <div className="flex flex-col items-center justify-center w-full relative mb-2 md:mb-4 max-w-4xl mt-2 md:mt-2">
+          <div className="flex items-center justify-center w-full max-w-xl relative">
+              <div className="absolute left-0">
+                  {!isOT ? (
+                  <button 
+                      onClick={() => traverseTestament(false)} 
+                      className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                  >
+                      <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+                  </button>
+                  ) : null}
+              </div>
+              
+              <div className="flex flex-col items-center mx-auto px-10">
+                  <div className="flex items-center space-x-1 sm:space-x-2 mb-1 sm:mb-2 md:mb-3">
+                    <Layers className="text-orange-500 w-4 h-4 sm:w-5 sm:h-5" />
+                    <h3 className="text-slate-500 uppercase tracking-widest font-semibold text-[10px] sm:text-xs md:text-sm">Testament Acrostic</h3>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-2 sm:mb-3 md:mb-4 text-slate-800 text-center leading-tight">
+                    {testamentDisplay}
+                  </h2>
+              </div>
 
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif mb-2 sm:mb-3 md:mb-4 text-slate-800 text-center leading-tight">
-          {testamentDisplay}
-        </h2>
+              <div className="absolute right-0">
+                  {isOT ? (
+                  <button 
+                      onClick={() => traverseTestament(true)} 
+                      className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                  >
+                      <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+                  </button>
+                  ) : null}
+              </div>
+          </div>
+        </div>
 
         <div className="mb-2 sm:mb-4 md:mb-6 w-full max-w-4xl px-2 sm:px-4">
           <InteractiveAcrostic text={rawAcrostic} hoverType="testament" startIdxOffset={isOT ? 0 : 39} />
@@ -66,13 +106,13 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
         <div className="flex items-center text-orange-600 font-medium tracking-widest uppercase mb-4 sm:mb-6 md:mb-10 text-[9px] sm:text-[10px] md:text-xs pb-1 sm:pb-2 gap-4">
           <button 
             onClick={() => setViewMode('groups')}
-            className={`flex items-center border-b-[2px] pb-1 px-2 transition-colors ${viewMode === 'groups' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
+            className={`flex items-center border-b-2 pb-1 px-2 transition-colors ${viewMode === 'groups' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
           >
             <Layers size={14} className="mr-1.5" /> <span className="hover:underline">{groupsToUse.length} Book Groups</span>
           </button>
           <button 
             onClick={() => setViewMode('list')}
-            className={`flex items-center border-b-[2px] pb-1 px-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
+            className={`flex items-center border-b-2 pb-1 px-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
           >
             <BookOpen size={14} className="mr-1.5" /> <span className="hover:underline">{testamentBookCount} Books Preview</span>
           </button>
@@ -115,7 +155,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                     />
                   </div>
 
-                  <div className="relative flex flex-col items-center md:items-end text-center md:text-right min-w-35 md:min-w-55 min-h-[36px] md:min-h-11 justify-center">
+                  <div className="relative flex flex-col items-center md:items-end text-center md:text-right min-w-35 md:min-w-55 min-h-9 md:min-h-11 justify-center">
                     <div className={`absolute transition-all duration-300 ${activeBookName ? 'opacity-100 scale-100 z-10' : 'opacity-0 scale-95 z-0 pointer-events-none'}`}>
                       <span className="text-xs sm:text-sm md:text-base font-bold text-orange-700 bg-orange-100/90 px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg sm:rounded-xl border border-orange-300/60 shadow-sm tracking-wider block">
                         {activeBookName}

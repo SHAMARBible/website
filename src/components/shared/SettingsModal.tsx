@@ -63,7 +63,7 @@ export const SettingsModal: React.FC = () => {
               </button>
             </div>
 
-            <div className="space-y-4 overflow-y-auto custom-scrollbar flex-shrink px-1 py-1">
+            <div className="space-y-4 overflow-y-auto custom-scrollbar shrink px-1 py-1">
               {/* Dropdowns */}
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Book</label>
@@ -155,7 +155,7 @@ export const SettingsModal: React.FC = () => {
               </button>
               <button 
                 onClick={handleApply}
-                className="flex-[2] bg-orange-500 hover:bg-orange-600 text-white shadow-md shadow-orange-200 font-bold py-2 rounded-xl transition-all flex justify-center items-center gap-2"
+                className="flex-2 bg-orange-500 hover:bg-orange-600 text-white shadow-md shadow-orange-200 font-bold py-2 rounded-xl transition-all flex justify-center items-center gap-2"
               >
                 <Check size={16} /> Navigate
               </button>
