@@ -76,7 +76,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                   {!isOT ? (
                   <button 
                       onClick={() => traverseTestament(false)} 
-                      className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                      className="text-slate-400 hover:text-orange-500 p-1 transition-colors cursor-pointer"
                   >
                       <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
                   </button>
@@ -97,7 +97,7 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                   {isOT ? (
                   <button 
                       onClick={() => traverseTestament(true)} 
-                      className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                      className="text-slate-400 hover:text-orange-500 p-1 transition-colors cursor-pointer"
                   >
                       <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                   </button>
@@ -129,13 +129,13 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
         <div className="flex items-center text-orange-600 font-medium tracking-widest uppercase mb-4 sm:mb-6 md:mb-10 text-[9px] sm:text-[10px] md:text-xs pb-1 sm:pb-2 gap-4">
           <button 
             onClick={() => setViewMode('groups')}
-            className={`flex items-center border-b-2 pb-1 px-2 transition-colors ${viewMode === 'groups' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
+            className={`flex items-center border-b-2 pb-1 px-2 transition-colors cursor-pointer ${viewMode === 'groups' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
           >
             <Layers size={14} className="mr-1.5" /> <span className="hover:underline">{groupsToUse.length} Book Groups</span>
           </button>
           <button 
             onClick={() => setViewMode('list')}
-            className={`flex items-center border-b-2 pb-1 px-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
+            className={`flex items-center border-b-2 pb-1 px-2 transition-colors cursor-pointer ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'border-transparent text-orange-600/70 hover:text-orange-600'}`}
           >
             <BookOpen size={14} className="mr-1.5" /> <span className="hover:underline">{testamentBookCount} Books Preview</span>
           </button>
@@ -175,6 +175,18 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                       textClass="text-base sm:text-xl md:text-2xl lg:text-3xl font-serif text-orange-700 font-semibold tracking-widest"
                       onHoverChange={(i) => setHoveredBookIdx(i)}
                       externalHoverIdx={hoveredBookIdx}
+                      onAcrosticClick={(idx) => {
+                          if (explorationMode && idx) {
+                              const bId = group.books[idx - runningOffset - 1];
+                              if (bId) {
+                                  setTargetBookId(bId);
+                                  setTargetChapter('1');
+                                  setTargetVerse('1');
+                                  goToStep(3);
+                              }
+                          }
+                      }}
+                      interactiveClass={explorationMode ? "cursor-pointer" : "cursor-default"}
                     />
                   </div>
 
@@ -202,15 +214,21 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                         <React.Fragment key={bIdx}>
                           {bIdx > 0 && <span className="text-slate-300 pointer-events-none">•</span>}
                           <span
-                            className={`inline-block transition-all duration-300 uppercase ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isThisBookHovered ? 'text-orange-600 font-bold drop-shadow-sm scale-105' : 'hover:text-orange-400'}`}
+                             className={`inline-block transition-all duration-300 uppercase ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isThisBookHovered ? 'text-orange-600 font-bold drop-shadow-sm scale-110' : 'hover:text-orange-400'} ${tappedListId === bId ? 'text-orange-600 font-bold scale-110' : ''}`}
                             onMouseEnter={() => setHoveredBookIdx(localGlobalIdx)}
                             onMouseLeave={() => setHoveredBookIdx(null)}
                             onClick={() => {
                                 if (explorationMode) {
+                                    const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+                                    if (isTouchPrimary && tappedListId !== bId) {
+                                        setTappedListId(bId);
+                                        return;
+                                    }
                                     setTargetBookId(bId);
                                     setTargetChapter('1');
                                     setTargetVerse('1');
                                     goToStep(3); // Jump to Book View
+                                    setTappedListId(null);
                                 }
                             }}
                           >
@@ -230,15 +248,22 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
             {groupsToUse.flatMap(g => g.books).map((bookId, idx) => {
                const bName = BIBLE_BOOKS[bookId].name;
                const bAcrostic = data?.bookAcrostics?.[bookId] || "Loading acrostic...";
+               const isTapped = tappedListId === bookId;
                return (
                  <div key={bookId} 
-                      className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 ${explorationMode ? 'cursor-pointer hover:scale-[1.01] hover:border-orange-300' : 'cursor-default'}`}
+                      className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl transition-all duration-300 ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isTapped ? 'scale-[1.01] border-orange-300 shadow-md' : 'shadow-sm hover:shadow-md hover:scale-[1.01] hover:border-orange-300'}`}
                       onClick={() => {
                         if (explorationMode) {
+                            const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+                            if (isTouchPrimary && !isTapped) {
+                                setTappedListId(bookId);
+                                return;
+                            }
                             setTargetBookId(bookId);
                             setTargetChapter('1');
                             setTargetVerse('1');
                             goToStep(3);
+                            setTappedListId(null);
                         }
                       }}>
                    <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider mb-2">{bName}</span>

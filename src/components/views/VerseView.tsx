@@ -133,7 +133,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                     {prevVerse ? (
                     <button 
                         onClick={() => traverseVerse(prevVerse)} 
-                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors cursor-pointer"
                     >
                         <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
                     </button>
@@ -145,7 +145,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-slate-800 text-center">{bookMeta.name} {targetChapter}:{targetVerse}</h2>
                     <button 
                       onClick={() => { setAutoOpenListFocus(true); goToStep(4); }}
-                      className="text-[10px] md:text-[11px] text-orange-400 hover:text-orange-600 uppercase tracking-widest font-semibold mt-1 hover:underline underline-offset-4 transition-colors text-center"
+                      className="text-[10px] md:text-[11px] text-orange-400 hover:text-orange-600 uppercase tracking-widest font-semibold mt-1 hover:underline underline-offset-4 transition-colors text-center cursor-pointer"
                     >
                       View Verse List
                     </button>
@@ -155,7 +155,7 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
                     {nextVerse ? (
                     <button 
                         onClick={() => traverseVerse(nextVerse)} 
-                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors"
+                        className="text-slate-400 hover:text-orange-500 p-1 transition-colors cursor-pointer"
                     >
                         <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
                     </button>
