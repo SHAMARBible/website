@@ -209,8 +209,8 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                    </div>
 
                    <div className="mb-4">
-                     <span className="text-xl md:text-2xl font-serif text-slate-800 font-bold tracking-widest border-l-4 border-orange-500 pl-4 py-1 block bg-orange-50/30 rounded-r-lg">
-                       <span className="text-orange-600 underline underline-offset-4 decoration-2">{(vData.acrostic || "").charAt(0)}</span>
+                     <span className="text-lg md:text-xl font-serif text-slate-800 font-bold tracking-widest border-l-4 border-orange-500 pl-4 py-1 block bg-orange-50/30 rounded-r-lg">
+                       <span className="text-orange-600">{(vData.acrostic || "").charAt(0)}</span>
                        {(vData.acrostic || "").slice(1)}
                      </span>
                    </div>
