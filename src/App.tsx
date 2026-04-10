@@ -76,40 +76,40 @@ export default function App() {
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-1 sm:gap-2 text-[10px] sm:text-xs md:text-sm font-medium tracking-wide flex-1 order-2 md:order-1">
             <button
               onClick={() => handleTopMenuClick(0)}
-              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+              className={`cursor-pointer hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 0 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Introduction</span>
               <span className="sm:hidden">Intro</span>
             </button>
             <button 
                 onClick={() => handleTopMenuClick(1)} 
-                className={`hidden hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+                className={`hidden cursor-pointer hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 1 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Bible
             </button>
             <button
               onClick={() => handleTopMenuClick(2)}
-              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+              className={`cursor-pointer hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 2 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Testament</span>
               <span className="sm:hidden">Test.</span>
             </button>
             <button
               onClick={() => handleTopMenuClick(3)}
-              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+              className={`cursor-pointer hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 3 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Book
             </button>
             <button
               onClick={() => handleTopMenuClick(4)}
-              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+              className={`cursor-pointer hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 4 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Chapter</span>
               <span className="sm:hidden">Chap.</span>
             </button>
             <button
               onClick={() => handleTopMenuClick(5)}
-              className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+              className={`cursor-pointer hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 5 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Verse
             </button>
@@ -117,20 +117,20 @@ export default function App() {
 
           {/* Center: The Global Settings Modal acts as the App Title Dropdown now */}
           <div className="flex justify-center items-center shrink-0 md:flex-1 order-1 md:order-2">
-            <SettingsModal />
+            <SettingsModal goToStep={goToStep} />
           </div>
 
           {/* Right: Utility Toggles */}
           <div className="flex justify-center md:justify-end items-center shrink-0 md:flex-1 order-3">
             <div className="flex items-center gap-1 sm:gap-2 md:gap-3 transition-all duration-300 bg-white/50 backdrop-blur-md px-2 py-1 md:px-3 md:py-1.5 rounded-full shadow-sm border border-slate-200/50">
-              <button onClick={() => setShowAcrosticBreadcrumbs(!showAcrosticBreadcrumbs)} className={`flex items-center gap-1.5 p-1 md:px-2 md:py-1 rounded-md transition-colors ${showAcrosticBreadcrumbs ? 'text-orange-600 bg-orange-50' : 'text-slate-500 hover:text-orange-600 hover:bg-white/60'}`} title="Map">
+              <button onClick={() => setShowAcrosticBreadcrumbs(!showAcrosticBreadcrumbs)} className={`flex items-center gap-1.5 p-1 md:px-2 md:py-1 rounded-md transition-colors cursor-pointer ${showAcrosticBreadcrumbs ? 'text-orange-600 bg-orange-50' : 'text-slate-500 hover:text-orange-600 hover:bg-white/60'}`} title="Map">
                 <Map size={16} />
                 <span className="hidden lg:inline text-xs font-semibold uppercase tracking-wider">Map</span>
               </button>
 
               <div className="w-px h-4 md:h-5 bg-slate-300/80"></div>
 
-              <button onClick={toggleFullScreen} className="flex items-center p-1 md:p-1.5 rounded-md text-slate-500 hover:text-orange-600 hover:bg-white/60 transition-colors" title="Full Screen">
+              <button onClick={toggleFullScreen} className="flex items-center p-1 md:p-1.5 rounded-md text-slate-500 hover:text-orange-600 hover:bg-white/60 transition-colors cursor-pointer" title="Full Screen">
                 {presentationMode ? <Minimize size={16} /> : <Maximize size={16} />}
               </button>
             </div>

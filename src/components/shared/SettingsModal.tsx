@@ -3,7 +3,7 @@ import { X, Pencil, ChevronDown, Check, ChevronRight } from 'lucide-react';
 import { useAppContext } from '../../contexts/AppContext';
 import { BIBLE_BOOKS, BIBLE_BOOK_ORDER } from '../../data/metadata/bibleBooks';
 
-export const SettingsModal: React.FC = () => {
+export const SettingsModal: React.FC<{ goToStep?: (step: number) => void }> = ({ goToStep }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { targetBookId, setTargetBookId, targetChapter, setTargetChapter, targetVerse, setTargetVerse, navigationHistory } = useAppContext();
 
@@ -24,6 +24,9 @@ export const SettingsModal: React.FC = () => {
     setTargetChapter(tempChapter);
     setTargetVerse(tempVerse);
     setIsOpen(false);
+    if (goToStep) {
+        goToStep(5); // Always navigate to Verse Level
+    }
   };
 
   const bookData = BIBLE_BOOKS[tempBook];
@@ -40,7 +43,7 @@ export const SettingsModal: React.FC = () => {
     <div className="relative">
       <button
         onClick={handleOpen}
-        className="group flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-1.5 hover:bg-orange-50/50 rounded-xl transition-all"
+        className="group flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-1.5 hover:bg-orange-50/50 rounded-xl transition-all cursor-pointer"
         title="Edit Focus Verse"
       >
         <span className="text-xs font-bold text-slate-400 tracking-widest uppercase hidden md:block">Focus:</span>
@@ -133,8 +136,9 @@ export const SettingsModal: React.FC = () => {
                           setTargetChapter(loc.chapter);
                           setTargetVerse(loc.verse);
                           setIsOpen(false);
+                          if (goToStep) goToStep(5);
                         }}
-                        className="text-left text-xs sm:text-sm font-medium text-slate-600 hover:text-orange-700 hover:bg-orange-50 px-3 py-2 rounded-lg transition-colors flex items-center justify-between"
+                        className="text-left text-xs sm:text-sm font-medium text-slate-600 hover:text-orange-700 hover:bg-orange-50 px-3 py-2 rounded-lg transition-colors flex items-center justify-between cursor-pointer"
                       >
                         <span>{BIBLE_BOOKS[loc.bookId]?.name} {loc.chapter}:{loc.verse}</span>
                         <ChevronRight size={14} className="opacity-0 hover:opacity-100 text-orange-400" />

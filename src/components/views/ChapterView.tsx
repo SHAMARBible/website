@@ -103,6 +103,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                   label="Testament" subLabel={`(${isOT ? 39 : 27} Books)`}
                   referenceLabel={isOT ? "Old Testament" : "New Testament"}
                   onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
+                  tooltipAlign="left"
                 />
                 <ChevronRight className={`hidden lg:block w-3.5 h-3.5 transition-colors duration-300 ${hoveredLevel === 'testament' ? 'text-orange-500 scale-125' : 'text-orange-300/80'}`} />
                 <HighlightedAcrostic
@@ -112,6 +113,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                   label="Book" subLabel={`(${bookMeta.verses.length} Chapters)`}
                   referenceLabel={bookMeta.name}
                   onHoverEnter={() => setHoveredLevel('book')} onHoverLeave={() => setHoveredLevel(null)}
+                  tooltipAlign="right"
                 />
               </div>
             )}

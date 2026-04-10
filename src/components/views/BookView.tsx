@@ -101,6 +101,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
                   label="Testament" subLabel={`(${isOT ? 39 : 27} Books)`}
                   referenceLabel={isOT ? "Old Testament" : "New Testament"}
                   onHoverEnter={() => setHoveredLevel('testament')} onHoverLeave={() => setHoveredLevel(null)}
+                  tooltipAlign="left"
                 />
               </div>
             )}
