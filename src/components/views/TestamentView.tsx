@@ -100,7 +100,23 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
         </div>
 
         <div className="mb-2 sm:mb-4 md:mb-6 w-full max-w-4xl px-2 sm:px-4">
-          <InteractiveAcrostic text={rawAcrostic} hoverType="testament" startIdxOffset={isOT ? 0 : 39} />
+          <InteractiveAcrostic 
+            text={rawAcrostic} 
+            hoverType="testament" 
+            startIdxOffset={isOT ? 0 : 39} 
+            onAcrosticClick={(idx) => {
+                if (explorationMode && idx) {
+                    const bookId = BIBLE_BOOK_ORDER[idx - 1];
+                    if (bookId) {
+                        setTargetBookId(bookId);
+                        setTargetChapter('1');
+                        setTargetVerse('1');
+                        goToStep(3);
+                    }
+                }
+            }}
+            interactiveClass={explorationMode ? "cursor-pointer" : "cursor-default"}
+          />
         </div>
 
         <div className="flex items-center text-orange-600 font-medium tracking-widest uppercase mb-4 sm:mb-6 md:mb-10 text-[9px] sm:text-[10px] md:text-xs pb-1 sm:pb-2 gap-4">
