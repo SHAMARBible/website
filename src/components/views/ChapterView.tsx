@@ -84,7 +84,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
 
   return (
     <div ref={scrollContainerRef} className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-      <div className="w-full flex flex-col items-center pb-24">
+      <div className="w-full flex flex-col items-center pb-4">
         
         <div className="w-full flex flex-col items-center py-4 px-2 sm:px-4">
           <div className="w-full max-w-4xl flex flex-col sm:flex-row justify-between items-center mb-4 md:mb-6 mt-4 md:mt-0 gap-4">
@@ -164,15 +164,9 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
           />
         </div>
 
-        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
+        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2 pb-1 sm:pb-2">
           <button 
-            onClick={() => setViewMode('acrostic')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'acrostic' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
-          >
-            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> Chapter Acrostic
-          </button>
-          <button 
-            onClick={() => setViewMode('list')}
+            onClick={() => setViewMode(viewMode === 'list' ? 'acrostic' : 'list')}
             className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
           >
             <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {verseCount} Verses Preview
@@ -180,7 +174,7 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
         </div>
 
         {viewMode === 'list' && (
-          <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-12">
+          <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-4">
             {Object.keys(chapterData.verses).map((verseKey) => {
                const vData = chapterData.verses[verseKey];
                if (!vData) return null;

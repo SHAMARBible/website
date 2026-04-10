@@ -15,7 +15,7 @@ export interface BookViewProps {
 }
 
 export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadcrumbs, hoveredLevel, setHoveredLevel, goToStep }) => {
-  const { targetBookId, setTargetBookId, setTargetChapter, explorationMode, autoOpenListFocus, setAutoOpenListFocus } = useAppContext();
+  const { targetBookId, setTargetBookId, setTargetChapter, setTargetVerse, explorationMode, autoOpenListFocus, setAutoOpenListFocus } = useAppContext();
   const [bookData, setBookData] = useState<BookAcrostic | null>(null);
   const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -61,6 +61,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
   const traverseBook = (bId: string) => {
     setTargetBookId(bId);
     setTargetChapter('1');
+    setTargetVerse('1');
   };
 
   if (loading || !bookData || !testamentData) {
@@ -79,7 +80,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
 
   return (
     <div ref={scrollContainerRef} className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-      <div className="w-full flex flex-col items-center pb-24">
+      <div className="w-full flex flex-col items-center pb-4">
         
         {/* Header Section */}
         <div className="w-full flex flex-col items-center py-4 px-2 sm:px-4">
@@ -144,6 +145,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
             onAcrosticClick={(idx) => {
                 if (explorationMode && idx !== null) {
                     setTargetChapter(idx.toString());
+                    setTargetVerse('1');
                     goToStep(4);
                 }
             }}
@@ -151,15 +153,9 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
           />
         </div>
 
-        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2">
+        <div className="flex justify-center items-center gap-4 mb-4 sm:mb-6 md:mb-10 w-full max-w-4xl px-2 pb-1 sm:pb-2">
           <button 
-            onClick={() => setViewMode('acrostic')}
-            className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'acrostic' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
-          >
-            <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> Book Acrostic
-          </button>
-          <button 
-            onClick={() => setViewMode('list')}
+            onClick={() => setViewMode(viewMode === 'list' ? 'acrostic' : 'list')}
             className={`flex items-center text-[9px] sm:text-[10px] md:text-xs font-medium tracking-widest uppercase pb-1 sm:pb-2 border-b-2 transition-colors ${viewMode === 'list' ? 'text-orange-700 border-orange-500 font-bold' : 'text-orange-600/70 border-transparent hover:text-orange-600'}`}
           >
             <BookOpen size={12} className="mr-1.5 md:w-3.5 md:h-3.5" /> {bookMeta.verses.length} Chapters Preview
@@ -167,7 +163,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
         </div>
         
         {viewMode === 'list' && (
-          <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-12">
+          <div className="w-full max-w-4xl flex flex-col space-y-3 sm:space-y-4 px-2 sm:px-4 pb-4">
             {Object.keys(bookData.chapters).map((chKey, idx) => {
                const chData = bookData.chapters[chKey];
                if (!chData) return null;
@@ -177,6 +173,7 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
                       onClick={() => {
                         if (explorationMode) {
                             setTargetChapter(chKey);
+                            setTargetVerse('1');
                             goToStep(4);
                         }
                       }}>

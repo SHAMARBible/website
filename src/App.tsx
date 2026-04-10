@@ -50,7 +50,19 @@ export default function App() {
 
   const handleNext = () => setCurrentStep(prev => Math.min(prev + 1, steps.length - 1));
   const handlePrev = () => setCurrentStep(prev => Math.max(prev - 1, 0));
-  const goToStep = (index: number) => setCurrentStep(index);
+  const goToStep = (index: number) => {
+    setCurrentStep(index);
+    if (index === 0 || index === 1) {
+      setHoveredLevel(null);
+    }
+  };
+
+  const handleTopMenuClick = (index: number) => {
+    goToStep(index);
+    // Grab all direct view containers by tag or class and reset their scroll
+    const containers = document.querySelectorAll('.custom-scrollbar');
+    containers.forEach(c => c.scrollTo({ top: 0, behavior: 'instant' }));
+  };
 
   return (
     <div className="min-h-dvh relative overflow-hidden font-sans text-slate-800 selection:bg-orange-200 bg-linear-to-b from-amber-50 via-orange-100 to-rose-200">
@@ -63,39 +75,40 @@ export default function App() {
           {/* Left: View Switcher Container */}
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-1 sm:gap-2 text-[10px] sm:text-xs md:text-sm font-medium tracking-wide flex-1 order-2 md:order-1">
             <button 
-                onClick={() => goToStep(0)} 
-                className={`hover:text-orange-600 transition-colors flex items-center px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
+                onClick={() => handleTopMenuClick(0)} 
+                className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 0 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
-              <Home size={14} className="md:mr-1.5" /> <span className="hidden md:inline">Intro</span>
+              <span className="hidden sm:inline">Introduction</span>
+              <span className="sm:hidden">Intro</span>
             </button>
             <button 
-                onClick={() => goToStep(1)} 
+                onClick={() => handleTopMenuClick(1)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 1 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Bible
             </button>
             <button 
-                onClick={() => goToStep(2)} 
+                onClick={() => handleTopMenuClick(2)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 2 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Testament</span>
               <span className="sm:hidden">Test.</span>
             </button>
             <button 
-                onClick={() => goToStep(3)} 
+                onClick={() => handleTopMenuClick(3)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 3 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Book
             </button>
             <button 
-                onClick={() => goToStep(4)} 
+                onClick={() => handleTopMenuClick(4)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 4 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               <span className="hidden sm:inline">Chapter</span>
               <span className="sm:hidden">Chap.</span>
             </button>
             <button 
-                onClick={() => goToStep(5)} 
+                onClick={() => handleTopMenuClick(5)} 
                 className={`hover:text-orange-600 transition-colors px-2 py-1 md:px-3 md:py-1.5 rounded-full border shadow-sm backdrop-blur-sm shrink-0 whitespace-nowrap
                 ${currentStep === 5 ? 'bg-orange-100/90 text-orange-800 border-orange-300 font-bold' : 'bg-white/50 border-white/60 text-slate-600'}`}>
               Verse

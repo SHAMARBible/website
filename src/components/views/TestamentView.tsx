@@ -11,7 +11,7 @@ export interface TestamentViewProps {
 }
 
 export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep }) => {
-  const { targetBookId, setTargetBookId, explorationMode } = useAppContext();
+  const { targetBookId, setTargetBookId, setTargetChapter, setTargetVerse, explorationMode } = useAppContext();
   const [hoveredGroupIndex, setHoveredGroupIndex] = useState<number | null>(null);
   const [hoveredBookIdx, setHoveredBookIdx] = useState<number | null>(null);
   const [data, setData] = useState<TestamentsData | null>(null);
@@ -145,6 +145,8 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                             onClick={() => {
                                 if (explorationMode) {
                                     setTargetBookId(bId);
+                                    setTargetChapter('1');
+                                    setTargetVerse('1');
                                     goToStep(3); // Jump to Book View
                                 }
                             }}
@@ -171,6 +173,8 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                       onClick={() => {
                         if (explorationMode) {
                             setTargetBookId(bookId);
+                            setTargetChapter('1');
+                            setTargetVerse('1');
                             goToStep(3);
                         }
                       }}>
