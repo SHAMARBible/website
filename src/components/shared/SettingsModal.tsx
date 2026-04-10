@@ -38,10 +38,10 @@ export const SettingsModal: React.FC = () => {
 
   return (
     <div className="relative">
-      <button 
-        onClick={handleOpen} 
-        className="group flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-1.5 hover:bg-orange-50/50 rounded-xl transition-all" 
-        title="Edit Focus Target"
+      <button
+        onClick={handleOpen}
+        className="group flex flex-col md:flex-row items-center gap-1 md:gap-2 px-3 py-1.5 hover:bg-orange-50/50 rounded-xl transition-all"
+        title="Edit Focus Verse"
       >
         <span className="text-xs font-bold text-slate-400 tracking-widest uppercase hidden md:block">Focus:</span>
         <div className="flex items-center gap-2 text-base md:text-xl font-serif text-slate-800 group-hover:text-orange-600 font-bold transition-colors">
@@ -56,7 +56,7 @@ export const SettingsModal: React.FC = () => {
           <div className="absolute top-full right-1/2 translate-x-1/2 md:translate-x-0 md:right-0 mt-2 w-72 md:w-80 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-orange-200 p-5 z-50 flex flex-col max-h-[85vh]">
             <div className="flex justify-between items-center mb-5 pb-3 border-b border-orange-100">
               <h3 className="font-bold text-slate-800 tracking-wide text-sm md:text-base flex items-center">
-                 <Pencil className="w-4 h-4 mr-2 text-orange-500" /> Focus Target
+                <Pencil className="w-4 h-4 mr-2 text-orange-500" /> Focus Verse
               </h3>
               <button onClick={() => setIsOpen(false)} className="text-slate-400 hover:text-rose-500 bg-slate-50 hover:bg-rose-50 p-1.5 rounded-full transition-colors hidden sm:block">
                 <X size={16} />
@@ -68,12 +68,12 @@ export const SettingsModal: React.FC = () => {
               <div>
                 <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Book</label>
                 <div className="relative">
-                  <select 
+                  <select
                     value={tempBook}
                     onChange={(e) => {
-                        setTempBook(e.target.value);
-                        setTempChapter("1");
-                        setTempVerse("1");
+                      setTempBook(e.target.value);
+                      setTempChapter("1");
+                      setTempVerse("1");
                     }}
                     className="w-full appearance-none bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 focus:bg-white transition-all cursor-pointer"
                   >
@@ -86,39 +86,39 @@ export const SettingsModal: React.FC = () => {
               </div>
 
               <div className="flex gap-3">
-                  <div className="flex-1">
-                      <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Chapter</label>
-                      <div className="relative">
-                        <select 
-                            value={tempChapter}
-                            onChange={(e) => {
-                                setTempChapter(e.target.value);
-                                setTempVerse("1");
-                            }}
-                            className="w-full appearance-none bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 focus:bg-white transition-all cursor-pointer"
-                        >
-                            {Array.from({length: maxChapters}, (_, i) => i + 1).map(num => (
-                                <option key={num} value={num.toString()}>{num}</option>
-                            ))}
-                        </select>
-                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-4 h-4" />
-                      </div>
+                <div className="flex-1">
+                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Chapter</label>
+                  <div className="relative">
+                    <select
+                      value={tempChapter}
+                      onChange={(e) => {
+                        setTempChapter(e.target.value);
+                        setTempVerse("1");
+                      }}
+                      className="w-full appearance-none bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 focus:bg-white transition-all cursor-pointer"
+                    >
+                      {Array.from({ length: maxChapters }, (_, i) => i + 1).map(num => (
+                        <option key={num} value={num.toString()}>{num}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-4 h-4" />
                   </div>
-                  <div className="flex-1">
-                      <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Verse</label>
-                      <div className="relative">
-                        <select 
-                            value={tempVerse}
-                            onChange={(e) => setTempVerse(e.target.value)}
-                            className="w-full appearance-none bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 focus:bg-white transition-all cursor-pointer"
-                        >
-                            {Array.from({length: maxVerses}, (_, i) => i + 1).map(num => (
-                                <option key={num} value={num.toString()}>{num}</option>
-                            ))}
-                        </select>
-                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-4 h-4" />
-                      </div>
+                </div>
+                <div className="flex-1">
+                  <label className="block text-[10px] font-bold text-slate-400 mb-1.5 uppercase tracking-widest">Verse</label>
+                  <div className="relative">
+                    <select
+                      value={tempVerse}
+                      onChange={(e) => setTempVerse(e.target.value)}
+                      className="w-full appearance-none bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 shadow-sm focus:outline-hidden focus:ring-2 focus:ring-orange-400/50 focus:border-orange-400 focus:bg-white transition-all cursor-pointer"
+                    >
+                      {Array.from({ length: maxVerses }, (_, i) => i + 1).map(num => (
+                        <option key={num} value={num.toString()}>{num}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-4 h-4" />
                   </div>
+                </div>
               </div>
 
               {navigationHistory.length > 1 && (
@@ -147,13 +147,13 @@ export const SettingsModal: React.FC = () => {
 
             {/* Bottom Actons */}
             <div className="mt-5 pt-4 border-t border-slate-100 flex gap-3 shrink-0">
-              <button 
+              <button
                 onClick={() => setIsOpen(false)}
                 className="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-2 rounded-xl transition-colors"
-                >
+              >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={handleApply}
                 className="flex-2 bg-orange-500 hover:bg-orange-600 text-white shadow-md shadow-orange-200 font-bold py-2 rounded-xl transition-all flex justify-center items-center gap-2"
               >
