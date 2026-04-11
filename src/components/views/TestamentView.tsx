@@ -25,6 +25,15 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
     return () => clearTimeout(timer);
   }, [tappedListId]);
 
+  // Reset internal interaction states when leaving the view
+  useEffect(() => {
+    if (!isActive) {
+      setHoveredGroupIndex(null);
+      setHoveredBookIdx(null);
+      setTappedListId(null);
+    }
+  }, [isActive]);
+
   // Determine if active target is OT or NT
   const isOT = BIBLE_BOOK_ORDER.indexOf(targetBookId) < 39;
   const groupsToUse = isOT ? OT_GROUPS : NT_GROUPS;
@@ -67,7 +76,10 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
   if (!rawAcrostic) return null;
 
   return (
-    <div className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+    <div 
+      onClick={() => { setHoveredBookIdx(null); setHoveredGroupIndex(null); }}
+      className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+    >
       <div className="w-full flex flex-col items-center pb-24 py-4 px-2 sm:px-4">
         
         <div className="flex flex-col items-center justify-center w-full relative mb-2 md:mb-4 max-w-4xl mt-2 md:mt-2">
@@ -217,18 +229,15 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                              className={`inline-block transition-all duration-300 uppercase ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isThisBookHovered ? 'text-orange-600 font-bold drop-shadow-sm scale-110' : 'hover:text-orange-400'} ${tappedListId === bId ? 'text-orange-600 font-bold scale-110' : ''}`}
                             onMouseEnter={() => setHoveredBookIdx(localGlobalIdx)}
                             onMouseLeave={() => setHoveredBookIdx(null)}
-                            onClick={() => {
+                            onClick={(e) => {
+                                e.stopPropagation();
                                 if (explorationMode) {
-                                    const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-                                    if (isTouchPrimary && tappedListId !== bId) {
-                                        setTappedListId(bId);
-                                        return;
-                                    }
                                     setTargetBookId(bId);
                                     setTargetChapter('1');
                                     setTargetVerse('1');
                                     goToStep(3); // Jump to Book View
                                     setTappedListId(null);
+                                    setHoveredBookIdx(null);
                                 }
                             }}
                           >
@@ -252,18 +261,15 @@ export const TestamentView: React.FC<TestamentViewProps> = ({ isActive, goToStep
                return (
                  <div key={bookId} 
                       className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl transition-all duration-300 ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isTapped ? 'scale-[1.01] border-orange-300 shadow-md' : 'shadow-sm hover:shadow-md hover:scale-[1.01] hover:border-orange-300'}`}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         if (explorationMode) {
-                            const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-                            if (isTouchPrimary && !isTapped) {
-                                setTappedListId(bookId);
-                                return;
-                            }
                             setTargetBookId(bookId);
                             setTargetChapter('1');
                             setTargetVerse('1');
                             goToStep(3);
                             setTappedListId(null);
+                            setHoveredBookIdx(null);
                         }
                       }}>
                    <span className="text-xs sm:text-sm font-bold text-orange-700 tracking-wider mb-2">{bName}</span>

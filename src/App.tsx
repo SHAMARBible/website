@@ -52,9 +52,7 @@ export default function App() {
   const handlePrev = () => setCurrentStep(prev => Math.max(prev - 1, 0));
   const goToStep = (index: number) => {
     setCurrentStep(index);
-    if (index === 0 || index === 1) {
-      setHoveredLevel(null);
-    }
+    setHoveredLevel(null);
   };
 
   const handleTopMenuClick = (index: number) => {

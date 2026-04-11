@@ -23,11 +23,12 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [tappedListId, setTappedListId] = useState<string | null>(null);
 
+  // Reset internal interaction states when leaving the view
   useEffect(() => {
-    if (tappedListId === null) return;
-    const timer = setTimeout(() => setTappedListId(null), 3000);
-    return () => clearTimeout(timer);
-  }, [tappedListId]);
+    if (!isActive) {
+      setTappedListId(null);
+    }
+  }, [isActive]);
 
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
@@ -90,7 +91,11 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
   const nextChapter = targetChapterNum < bookMeta.verses.length ? (targetChapterNum + 1).toString() : null;
 
   return (
-    <div ref={scrollContainerRef} className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+    <div 
+      ref={scrollContainerRef} 
+      onClick={() => setTappedListId(null)}
+      className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+    >
       <div className="w-full flex flex-col items-center pb-4">
         
         <div className="w-full flex flex-col items-center py-4 px-2 sm:px-4">
@@ -191,13 +196,9 @@ export const ChapterView: React.FC<ChapterViewProps> = ({ isActive, showAcrostic
                return (
                  <div key={verseKey} id={`verse-item-${verseKey}`}
                       className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl transition-all duration-300 ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isTapped ? 'scale-[1.01] border-orange-300 shadow-md' : 'shadow-sm hover:shadow-md hover:scale-[1.01] hover:border-orange-300'}`}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         if (explorationMode) {
-                            const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-                            if (isTouchPrimary && !isTapped) {
-                                setTappedListId(verseKey);
-                                return;
-                            }
                             setTargetVerse(verseKey);
                             goToStep(5);
                             setTappedListId(null);

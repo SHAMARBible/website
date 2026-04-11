@@ -21,6 +21,13 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
   const { targetBookId, targetChapter, targetVerse, setTargetVerse, setAutoOpenListFocus } = useAppContext();
   const [hoveredVerseIndex, setHoveredVerseIndex] = useState<number | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Reset internal interaction states when leaving the view
+  useEffect(() => {
+    if (!isActive) {
+      setHoveredVerseIndex(null);
+    }
+  }, [isActive]);
   
   const [bookData, setBookData] = useState<BookAcrostic | null>(null);
   const [testamentData, setTestamentData] = useState<TestamentsData | null>(null);
@@ -86,7 +93,11 @@ export const VerseView: React.FC<VerseViewProps> = ({ isActive, showAcrosticBrea
   const nextVerse = targetVerseNum < verseCount ? (targetVerseNum + 1).toString() : null;
 
   return (
-    <div ref={scrollContainerRef} className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+    <div 
+      ref={scrollContainerRef} 
+      onClick={() => setHoveredVerseIndex(null)}
+      className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+    >
       <div className="w-full flex flex-col items-center pb-24">
         
         {/* Header Section */}

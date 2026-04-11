@@ -29,6 +29,13 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
       return () => clearTimeout(timer);
   }, [tappedListId]);
 
+  // Reset internal interaction states when leaving the view
+  useEffect(() => {
+    if (!isActive) {
+      setTappedListId(null);
+    }
+  }, [isActive]);
+
   // Determine Testament context
   const globalIndex = BIBLE_BOOK_ORDER.indexOf(targetBookId);
   const isOT = globalIndex < 39;
@@ -86,7 +93,11 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
   const nextBookId = globalIndex < BIBLE_BOOK_ORDER.length - 1 ? BIBLE_BOOK_ORDER[globalIndex + 1] : null;
 
   return (
-    <div ref={scrollContainerRef} className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+    <div 
+      ref={scrollContainerRef} 
+      onClick={() => setTappedListId(null)}
+      className={`absolute inset-0 overflow-y-auto custom-scrollbar flex flex-col transition-all duration-1000 ease-in-out ${isActive ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+    >
       <div className="w-full flex flex-col items-center pb-4">
         
         {/* Header Section */}
@@ -179,13 +190,9 @@ export const BookView: React.FC<BookViewProps> = ({ isActive, showAcrosticBreadc
                return (
                  <div key={chKey} 
                       className={`flex flex-col bg-white/40 backdrop-blur-sm border border-white/50 p-3 sm:p-4 md:p-5 rounded-xl transition-all duration-300 ${explorationMode ? 'cursor-pointer' : 'cursor-default'} ${isTapped ? 'scale-[1.01] border-orange-300 shadow-md' : 'shadow-sm hover:shadow-md hover:scale-[1.01] hover:border-orange-300'}`}
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.stopPropagation();
                         if (explorationMode) {
-                            const isTouchPrimary = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-                            if (isTouchPrimary && !isTapped) {
-                                setTappedListId(chKey);
-                                return;
-                            }
                             setTargetChapter(chKey);
                             setTargetVerse('1');
                             goToStep(4);
